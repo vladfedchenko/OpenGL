@@ -17,4 +17,4 @@ LoadShaders.o: LoadShaders.cpp
 	$(CC) $(IFLAGS) $(CFLAGS) LoadShaders.cpp
 
 clean: 
-	rm -rf *.o $(EXECUTABLE)
+	rm -rf *.o $(EXECUTABLE) Debug Release -R

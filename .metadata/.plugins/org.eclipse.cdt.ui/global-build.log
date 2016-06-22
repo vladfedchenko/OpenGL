@@ -1,0 +1,182 @@
+21:42:13 **** Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:43:52 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+21:44:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+21:44:05 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+21:45:57 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   
+./LoadShaders.o: In function `LoadShaders(ShaderInfo*)':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:8: undefined reference to `__glewCreateShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:9: undefined reference to `__glewCreateShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:17: undefined reference to `__glewShaderSource'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:18: undefined reference to `__glewShaderSource'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:20: undefined reference to `__glewCompileShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:21: undefined reference to `__glewCompileShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:26: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:27: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:33: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:34: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:37: undefined reference to `__glewGetShaderInfoLog'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:38: undefined reference to `__glewGetShaderInfoLog'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:53: undefined reference to `__glewCreateProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:59: undefined reference to `__glewAttachShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:60: undefined reference to `__glewAttachShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:62: undefined reference to `__glewLinkProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:65: undefined reference to `__glewGetProgramiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:68: undefined reference to `__glewGetProgramInfoLog'
+./triangles.o: In function `init()':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:16: undefined reference to `__glewGenVertexArrays'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:17: undefined reference to `__glewBindVertexArray'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:29: undefined reference to `__glewGenBuffers'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:30: undefined reference to `__glewBindBuffer'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:31: undefined reference to `__glewBufferData'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:42: undefined reference to `__glewUseProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:44: undefined reference to `__glewVertexAttribPointer'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:45: undefined reference to `__glewEnableVertexAttribArray'
+./triangles.o: In function `display()':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:50: undefined reference to `glClear'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:51: undefined reference to `__glewBindVertexArray'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:52: undefined reference to `glDrawArrays'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:53: undefined reference to `glFlush'
+./triangles.o: In function `main':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:58: undefined reference to `glutInit'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:59: undefined reference to `glutInitDisplayMode'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:60: undefined reference to `glutInitWindowSize'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:61: undefined reference to `glutInitContextVersion'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:62: undefined reference to `glutInitContextProfile'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:63: undefined reference to `glutCreateWindow'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:65: undefined reference to `glewExperimental'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:66: undefined reference to `glewInit'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:73: undefined reference to `glutDisplayFunc'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:74: undefined reference to `glutMainLoop'
+collect2: error: ld returned 1 exit status
+make: *** [1. Triangles] Error 1
+21:46:04 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   
+./LoadShaders.o: In function `LoadShaders(ShaderInfo*)':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:8: undefined reference to `__glewCreateShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:9: undefined reference to `__glewCreateShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:17: undefined reference to `__glewShaderSource'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:18: undefined reference to `__glewShaderSource'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:20: undefined reference to `__glewCompileShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:21: undefined reference to `__glewCompileShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:26: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:27: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:33: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:34: undefined reference to `__glewGetShaderiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:37: undefined reference to `__glewGetShaderInfoLog'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:38: undefined reference to `__glewGetShaderInfoLog'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:53: undefined reference to `__glewCreateProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:59: undefined reference to `__glewAttachShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:60: undefined reference to `__glewAttachShader'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:62: undefined reference to `__glewLinkProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:65: undefined reference to `__glewGetProgramiv'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:68: undefined reference to `__glewGetProgramInfoLog'
+./triangles.o: In function `init()':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:16: undefined reference to `__glewGenVertexArrays'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:17: undefined reference to `__glewBindVertexArray'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:29: undefined reference to `__glewGenBuffers'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:30: undefined reference to `__glewBindBuffer'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:31: undefined reference to `__glewBufferData'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:42: undefined reference to `__glewUseProgram'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:44: undefined reference to `__glewVertexAttribPointer'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:45: undefined reference to `__glewEnableVertexAttribArray'
+./triangles.o: In function `display()':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:50: undefined reference to `glClear'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:51: undefined reference to `__glewBindVertexArray'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:52: undefined reference to `glDrawArrays'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:53: undefined reference to `glFlush'
+./triangles.o: In function `main':
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:58: undefined reference to `glutInit'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:59: undefined reference to `glutInitDisplayMode'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:60: undefined reference to `glutInitWindowSize'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:61: undefined reference to `glutInitContextVersion'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:62: undefined reference to `glutInitContextProfile'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:63: undefined reference to `glutCreateWindow'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:65: undefined reference to `glewExperimental'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:66: undefined reference to `glewInit'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:73: undefined reference to `glutDisplayFunc'
+/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:74: undefined reference to `glutMainLoop'
+collect2: error: ld returned 1 exit status
+make: *** [1. Triangles] Error 1
+21:47:44 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:48:38 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:48:44 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+21:48:55 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
