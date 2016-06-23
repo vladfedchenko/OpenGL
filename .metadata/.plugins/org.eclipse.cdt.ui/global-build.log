@@ -180,3 +180,379 @@ Invoking: Cross G++ Linker
 g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
 Finished building target: 1. Triangles
  
+21:48:36 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp:4:18: error: expected ‘]’ before ‘;’ token
+ #define NumVAOs 1;
+                  ^
+../triangles.cpp:9:13: note: in expansion of macro ‘NumVAOs’
+ GLuint VAOs[NumVAOs];
+             ^
+../triangles.cpp:9:20: error: expected unqualified-id before ‘]’ token
+ GLuint VAOs[NumVAOs];
+                    ^
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:4:18: error: expected ‘)’ before ‘;’ token
+ #define NumVAOs 1;
+                  ^
+../triangles.cpp:17:20: note: in expansion of macro ‘NumVAOs’
+  glGenVertexArrays(NumVAOs, VAOs);
+                    ^
+../triangles.cpp:17:27: error: expected primary-expression before ‘,’ token
+  glGenVertexArrays(NumVAOs, VAOs);
+                           ^
+../triangles.cpp:17:29: error: ‘VAOs’ was not declared in this scope
+  glGenVertexArrays(NumVAOs, VAOs);
+                             ^
+../triangles.cpp:17:33: error: expected ‘;’ before ‘)’ token
+  glGenVertexArrays(NumVAOs, VAOs);
+                                 ^
+../triangles.cpp:3:20: error: expected ‘]’ before ‘;’ token
+ #define Triangles 0;
+                    ^
+../triangles.cpp:18:25: note: in expansion of macro ‘Triangles’
+  glBindVertexArray(VAOs[Triangles]);
+                         ^
+../triangles.cpp:18:34: error: expected primary-expression before ‘]’ token
+  glBindVertexArray(VAOs[Triangles]);
+                                  ^
+../triangles.cpp:18:34: error: expected ‘;’ before ‘]’ token
+../triangles.cpp: In function ‘void display()’:
+../triangles.cpp:51:20: error: ‘VAOs’ was not declared in this scope
+  glBindVertexArray(VAOs[Triangles]);
+                    ^
+../triangles.cpp:3:20: error: expected ‘]’ before ‘;’ token
+ #define Triangles 0;
+                    ^
+../triangles.cpp:51:25: note: in expansion of macro ‘Triangles’
+  glBindVertexArray(VAOs[Triangles]);
+                         ^
+../triangles.cpp:51:34: error: expected primary-expression before ‘]’ token
+  glBindVertexArray(VAOs[Triangles]);
+                                  ^
+../triangles.cpp:51:34: error: expected ‘;’ before ‘]’ token
+make: *** [triangles.o] Error 1
+21:49:29 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:50:15 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:56:59 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:39: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size", sizeof(vertices));
+                                       ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:57:03 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+21:58:35 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:32:39: error: invalid conversion from ‘GLuint* {aka unsigned int*}’ to ‘GLuint {aka unsigned int}’ [-fpermissive]
+  glBindBuffer(GL_ARRAY_BUFFER, Buffers);
+                                       ^
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+make: *** [triangles.o] Error 1
+21:58:43 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:32:40: error: invalid conversion from ‘GLuint (*)[1] {aka unsigned int (*)[1]}’ to ‘GLuint {aka unsigned int}’ [-fpermissive]
+  glBindBuffer(GL_ARRAY_BUFFER, &Buffers);
+                                        ^
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+make: *** [triangles.o] Error 1
+21:58:51 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:59:07 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+21:59:11 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:16:57 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:17:10 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:17:17 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:17:23 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:17:35 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:17:43 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:18:24 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:18:37 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:18:48 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:20:06 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:23:52 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:24:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+  printf ("%i - size\n", sizeof(vertices));
+                                         ^
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:24:45 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:45:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:45:11 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+make: Nothing to be done for `all'.
+22:45:26 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:45:46 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:47:07 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:47:20 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
+22:47:48 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+../triangles.cpp: In function ‘void display()’:
+../triangles.cpp:55:26: error: expected primary-expression before ‘,’ token
+  glDrawArrays(GL_PATCHES,, 0, NumVertices);
+                          ^
+make: *** [triangles.o] Error 1
+22:47:54 **** Incremental Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+../triangles.cpp: In function ‘void init()’:
+../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
+  printf ("%l - size\n", sizeof(vertices));
+                                         ^
+../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
+ 
