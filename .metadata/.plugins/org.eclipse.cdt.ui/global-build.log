@@ -1,558 +1,224 @@
-21:42:13 **** Build of configuration Debug for project 1. Triangles ****
+22:32:23 **** Build of configuration Debug for project 3. Draw functions ****
 make all 
 Building file: ../LoadShaders.cpp
 Invoking: Cross G++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
 Finished building: ../LoadShaders.cpp
  
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:43:52 **** Incremental Build of configuration Debug for project 1. Triangles ****
+22:32:28 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
 make: Nothing to be done for `all'.
-21:44:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+22:32:48 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-21:44:05 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-21:45:57 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../LoadShaders.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
-Finished building: ../LoadShaders.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   
-./LoadShaders.o: In function `LoadShaders(ShaderInfo*)':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:8: undefined reference to `__glewCreateShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:9: undefined reference to `__glewCreateShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:17: undefined reference to `__glewShaderSource'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:18: undefined reference to `__glewShaderSource'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:20: undefined reference to `__glewCompileShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:21: undefined reference to `__glewCompileShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:26: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:27: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:33: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:34: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:37: undefined reference to `__glewGetShaderInfoLog'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:38: undefined reference to `__glewGetShaderInfoLog'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:53: undefined reference to `__glewCreateProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:59: undefined reference to `__glewAttachShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:60: undefined reference to `__glewAttachShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:62: undefined reference to `__glewLinkProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:65: undefined reference to `__glewGetProgramiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:68: undefined reference to `__glewGetProgramInfoLog'
-./triangles.o: In function `init()':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:16: undefined reference to `__glewGenVertexArrays'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:17: undefined reference to `__glewBindVertexArray'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:29: undefined reference to `__glewGenBuffers'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:30: undefined reference to `__glewBindBuffer'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:31: undefined reference to `__glewBufferData'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:42: undefined reference to `__glewUseProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:44: undefined reference to `__glewVertexAttribPointer'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:45: undefined reference to `__glewEnableVertexAttribArray'
-./triangles.o: In function `display()':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:50: undefined reference to `glClear'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:51: undefined reference to `__glewBindVertexArray'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:52: undefined reference to `glDrawArrays'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:53: undefined reference to `glFlush'
-./triangles.o: In function `main':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:58: undefined reference to `glutInit'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:59: undefined reference to `glutInitDisplayMode'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:60: undefined reference to `glutInitWindowSize'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:61: undefined reference to `glutInitContextVersion'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:62: undefined reference to `glutInitContextProfile'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:63: undefined reference to `glutCreateWindow'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:65: undefined reference to `glewExperimental'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:66: undefined reference to `glewInit'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:73: undefined reference to `glutDisplayFunc'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:74: undefined reference to `glutMainLoop'
-collect2: error: ld returned 1 exit status
-make: *** [1. Triangles] Error 1
-21:46:04 **** Incremental Build of configuration Debug for project 1. Triangles ****
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
+ 
+22:33:23 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building target: 1. Triangles
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   
-./LoadShaders.o: In function `LoadShaders(ShaderInfo*)':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:8: undefined reference to `__glewCreateShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:9: undefined reference to `__glewCreateShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:17: undefined reference to `__glewShaderSource'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:18: undefined reference to `__glewShaderSource'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:20: undefined reference to `__glewCompileShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:21: undefined reference to `__glewCompileShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:26: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:27: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:33: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:34: undefined reference to `__glewGetShaderiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:37: undefined reference to `__glewGetShaderInfoLog'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:38: undefined reference to `__glewGetShaderInfoLog'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:53: undefined reference to `__glewCreateProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:59: undefined reference to `__glewAttachShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:60: undefined reference to `__glewAttachShader'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:62: undefined reference to `__glewLinkProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:65: undefined reference to `__glewGetProgramiv'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../LoadShaders.cpp:68: undefined reference to `__glewGetProgramInfoLog'
-./triangles.o: In function `init()':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:16: undefined reference to `__glewGenVertexArrays'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:17: undefined reference to `__glewBindVertexArray'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:29: undefined reference to `__glewGenBuffers'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:30: undefined reference to `__glewBindBuffer'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:31: undefined reference to `__glewBufferData'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:42: undefined reference to `__glewUseProgram'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:44: undefined reference to `__glewVertexAttribPointer'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:45: undefined reference to `__glewEnableVertexAttribArray'
-./triangles.o: In function `display()':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:50: undefined reference to `glClear'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:51: undefined reference to `__glewBindVertexArray'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:52: undefined reference to `glDrawArrays'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:53: undefined reference to `glFlush'
-./triangles.o: In function `main':
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:58: undefined reference to `glutInit'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:59: undefined reference to `glutInitDisplayMode'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:60: undefined reference to `glutInitWindowSize'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:61: undefined reference to `glutInitContextVersion'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:62: undefined reference to `glutInitContextProfile'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:63: undefined reference to `glutCreateWindow'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:65: undefined reference to `glewExperimental'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:66: undefined reference to `glewInit'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:73: undefined reference to `glutDisplayFunc'
-/home/vladfedchenko/Documents/Github/OpenGL/1. Triangles/Debug/../triangles.cpp:74: undefined reference to `glutMainLoop'
-collect2: error: ld returned 1 exit status
-make: *** [1. Triangles] Error 1
-21:47:44 **** Incremental Build of configuration Debug for project 1. Triangles ****
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
+ 
+22:35:38 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building target: 1. Triangles
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:48:38 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:06:38 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../LoadShaders.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
-Finished building: ../LoadShaders.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:48:44 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:06:44 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-21:48:55 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../LoadShaders.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
-Finished building: ../LoadShaders.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:48:36 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:07:05 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../LoadShaders.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
-Finished building: ../LoadShaders.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp:4:18: error: expected ‘]’ before ‘;’ token
- #define NumVAOs 1;
-                  ^
-../triangles.cpp:9:13: note: in expansion of macro ‘NumVAOs’
- GLuint VAOs[NumVAOs];
-             ^
-../triangles.cpp:9:20: error: expected unqualified-id before ‘]’ token
- GLuint VAOs[NumVAOs];
-                    ^
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:4:18: error: expected ‘)’ before ‘;’ token
- #define NumVAOs 1;
-                  ^
-../triangles.cpp:17:20: note: in expansion of macro ‘NumVAOs’
-  glGenVertexArrays(NumVAOs, VAOs);
-                    ^
-../triangles.cpp:17:27: error: expected primary-expression before ‘,’ token
-  glGenVertexArrays(NumVAOs, VAOs);
-                           ^
-../triangles.cpp:17:29: error: ‘VAOs’ was not declared in this scope
-  glGenVertexArrays(NumVAOs, VAOs);
-                             ^
-../triangles.cpp:17:33: error: expected ‘;’ before ‘)’ token
-  glGenVertexArrays(NumVAOs, VAOs);
-                                 ^
-../triangles.cpp:3:20: error: expected ‘]’ before ‘;’ token
- #define Triangles 0;
-                    ^
-../triangles.cpp:18:25: note: in expansion of macro ‘Triangles’
-  glBindVertexArray(VAOs[Triangles]);
-                         ^
-../triangles.cpp:18:34: error: expected primary-expression before ‘]’ token
-  glBindVertexArray(VAOs[Triangles]);
-                                  ^
-../triangles.cpp:18:34: error: expected ‘;’ before ‘]’ token
-../triangles.cpp: In function ‘void display()’:
-../triangles.cpp:51:20: error: ‘VAOs’ was not declared in this scope
-  glBindVertexArray(VAOs[Triangles]);
-                    ^
-../triangles.cpp:3:20: error: expected ‘]’ before ‘;’ token
- #define Triangles 0;
-                    ^
-../triangles.cpp:51:25: note: in expansion of macro ‘Triangles’
-  glBindVertexArray(VAOs[Triangles]);
-                         ^
-../triangles.cpp:51:34: error: expected primary-expression before ‘]’ token
-  glBindVertexArray(VAOs[Triangles]);
-                                  ^
-../triangles.cpp:51:34: error: expected ‘;’ before ‘]’ token
-make: *** [triangles.o] Error 1
-21:49:29 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:50:15 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:07:25 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:56:59 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:07:47 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:39: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size", sizeof(vertices));
-                                       ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:57:03 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:08:26 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-21:58:35 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:32:39: error: invalid conversion from ‘GLuint* {aka unsigned int*}’ to ‘GLuint {aka unsigned int}’ [-fpermissive]
-  glBindBuffer(GL_ARRAY_BUFFER, Buffers);
-                                       ^
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-make: *** [triangles.o] Error 1
-21:58:43 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:32:40: error: invalid conversion from ‘GLuint (*)[1] {aka unsigned int (*)[1]}’ to ‘GLuint {aka unsigned int}’ [-fpermissive]
-  glBindBuffer(GL_ARRAY_BUFFER, &Buffers);
-                                        ^
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-make: *** [triangles.o] Error 1
-21:58:51 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:59:07 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:08:34 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-21:59:11 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:08:40 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-22:16:57 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:17:10 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:09:04 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-22:17:17 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:17:23 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:17:35 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:17:43 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:18:24 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:18:37 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:18:48 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:20:06 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-make: Nothing to be done for `all'.
-22:23:52 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:24:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:09:19 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: format ‘%i’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
-  printf ("%i - size\n", sizeof(vertices));
-                                         ^
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:24:45 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:10:13 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:45:02 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:10:42 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:45:11 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:11:00 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-make: Nothing to be done for `all'.
-22:45:26 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
-22:45:46 **** Incremental Build of configuration Debug for project 1. Triangles ****
+00:11:18 **** Incremental Build of configuration Debug for project 3. Draw functions ****
 make all 
-Building file: ../triangles.cpp
+Building file: ../main.cpp
 Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
  
-Building target: 1. Triangles
+Building target: 3. Draw functions
 Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
- 
-22:47:07 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
-Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
- 
-22:47:20 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
-Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
- 
-22:47:48 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-../triangles.cpp: In function ‘void display()’:
-../triangles.cpp:55:26: error: expected primary-expression before ‘,’ token
-  glDrawArrays(GL_PATCHES,, 0, NumVertices);
-                          ^
-make: *** [triangles.o] Error 1
-22:47:54 **** Incremental Build of configuration Debug for project 1. Triangles ****
-make all 
-Building file: ../triangles.cpp
-Invoking: Cross G++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
-../triangles.cpp: In function ‘void init()’:
-../triangles.cpp:33:41: warning: unknown conversion type character 0x20 in format [-Wformat=]
-  printf ("%l - size\n", sizeof(vertices));
-                                         ^
-../triangles.cpp:33:41: warning: too many arguments for format [-Wformat-extra-args]
-Finished building: ../triangles.cpp
- 
-Building target: 1. Triangles
-Invoking: Cross G++ Linker
-g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
-Finished building target: 1. Triangles
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Draw functions"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Draw functions
  
