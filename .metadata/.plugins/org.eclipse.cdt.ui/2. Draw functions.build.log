@@ -1,0 +1,7 @@
+16:42:32 **** Clean-only build of configuration Debug for project 2. Draw functions ****
+make clean 
+rm -rf  ./LoadShaders.o ./main.o  ./LoadShaders.d ./main.d  "2. Draw functions"
+ 
+
+16:42:32 Build Finished (took 67ms)
+

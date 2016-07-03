@@ -1,6 +1,7 @@
-21:19:54 **** Clean-only build of configuration Debug for project 1. Triangles ****
+16:42:27 **** Clean-only build of configuration Debug for project 1. Triangles ****
 make clean 
-make: *** No rule to make target `clean'.  Stop.
+rm -rf  ./LoadShaders.o ./triangles.o  ./LoadShaders.d ./triangles.d  "1. Triangles"
+ 
 
-21:19:54 Build Finished (took 70ms)
+16:42:27 Build Finished (took 66ms)
 
