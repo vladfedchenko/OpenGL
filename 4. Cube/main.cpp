@@ -96,12 +96,12 @@ void init(void)
 	glVertexAttribPointer(norm_loc, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)(sizeof(vertices) + sizeof(colors)));
 	glEnableVertexAttribArray(norm_loc);
 
-	glm::vec3 eye(2.0, 2.0, 2.0);
-	glm::vec3 norm(-1.0, -1.0, -1.0);
-	glm::vec3 up(0.0, 0.0, 1.0);
+	glm::vec3 eye(0.0, 0.0, 3.0);
+	glm::vec3 norm(0.0, 0.0, -1.0);
+	glm::vec3 up(1.0, 0.0, 0.0);
 	glm::mat4 view_mat = glm::lookAt(eye, norm, up);
 
-	glm::mat4 project_mat = glm::frustum(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 100.0f);
+	glm::mat4 project_mat = glm::frustum(-1.0f, 1.0f, -1.0f, 1.0f, 2.0f, 4.0f);
 
 	GLuint view_matr_loc = glGetUniformLocation(program, "view_matrix");
 	GLuint proj_matr_loc = glGetUniformLocation(program, "projection_matrix");
@@ -114,15 +114,15 @@ void init(void)
 
 void display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_INT, (const void*)(0 * sizeof(GLuint)));
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (const void*)(0 * sizeof(GLuint)));
 	glFlush();
 }
 
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(512, 512);
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);

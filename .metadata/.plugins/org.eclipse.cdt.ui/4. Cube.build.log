@@ -1,4 +1,4 @@
-20:57:21 **** Incremental Build of configuration Debug for project 4. Cube ****
+21:14:21 **** Incremental Build of configuration Debug for project 4. Cube ****
 make all 
 Building file: ../main.cpp
 Invoking: Cross G++ Compiler
@@ -64,5 +64,5 @@ g++ -L/usr/lib/x86_64-linux-gnu -o "4. Cube"  ./LoadShaders.o ./main.o   -lGL -l
 Finished building target: 4. Cube
  
 
-20:57:22 Build Finished (took 1s.379ms)
+21:14:22 Build Finished (took 1s.380ms)
 
