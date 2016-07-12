@@ -30,7 +30,7 @@ void init(void)
 	
 	glGenBuffers(NumBuffers, Buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, *Buffers);
-	printf ("%l - size\n", sizeof(vertices));
+	//printf ("%l - size\n", sizeof(vertices));
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
 	ShaderInfo shaders[] = {
