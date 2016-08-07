@@ -1,7 +1,20 @@
-21:27:59 **** Clean-only build of configuration Debug for project 1. Triangles ****
-make clean 
-rm -rf  ./LoadShaders.o ./triangles.o  ./LoadShaders.d ./triangles.d  "1. Triangles"
+02:33:24 **** Build of configuration Debug for project 1. Triangles ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../triangles.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triangles.d" -MT"triangles.d" -o "triangles.o" "../triangles.cpp"
+Finished building: ../triangles.cpp
+ 
+Building target: 1. Triangles
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "1. Triangles"  ./LoadShaders.o ./triangles.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 1. Triangles
  
 
-21:27:59 Build Finished (took 80ms)
+02:33:26 Build Finished (took 1s.480ms)
 

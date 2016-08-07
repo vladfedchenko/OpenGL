@@ -1,7 +1,20 @@
-21:27:53 **** Clean-only build of configuration Debug for project 3. Instanced rendering ****
-make clean 
-rm -rf  ./LoadShaders.o ./main.o  ./LoadShaders.d ./main.d  "3. Instanced rendering"
+02:33:27 **** Build of configuration Debug for project 3. Instanced rendering ****
+make all 
+Building file: ../LoadShaders.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LoadShaders.d" -MT"LoadShaders.d" -o "LoadShaders.o" "../LoadShaders.cpp"
+Finished building: ../LoadShaders.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: 3. Instanced rendering
+Invoking: Cross G++ Linker
+g++ -L/usr/lib/x86_64-linux-gnu -o "3. Instanced rendering"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglut
+Finished building target: 3. Instanced rendering
  
 
-21:27:54 Build Finished (took 67ms)
+02:33:29 Build Finished (took 1s.495ms)
 

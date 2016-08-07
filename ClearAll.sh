@@ -16,3 +16,7 @@ cd 4.\ Cube
 make clean
 cd ..
 
+cd 5.\ Texture
+make clean
+cd ..
+

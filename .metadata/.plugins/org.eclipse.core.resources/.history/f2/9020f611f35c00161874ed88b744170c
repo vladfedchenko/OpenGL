@@ -1,0 +1,117 @@
+#include "LoadShaders.h"
+#include <iostream>
+#include <stdio.h>
+#include <glm/common.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <png.h>
+
+#define WIDTH 1366
+#define HEIGHT 768
+
+typedef struct PixelColorStruct
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	unsigned char a;
+} PixelColor;
+
+GLuint VAO;
+GLuint buffer;
+GLuint element_array_buffer;
+GLuint tex;
+
+void init(void) {
+	ShaderInfo shaders[] = { { GL_VERTEX_SHADER, "./triangles.vert" }, {
+			GL_FRAGMENT_SHADER, "./triangles.frag" }, { GL_NONE, NULL } };
+
+	GLuint program = LoadShaders(shaders);
+	if (program == 0) {
+		return;
+	}
+	glUseProgram(program);
+
+	glEnable(GL_DEPTH_TEST);
+
+	generateAndFIllTexture(tex);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	GLuint indexes[4] = {0, 1, 2, 3};
+
+	glGenBuffers(1, element_array_buffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *element_array_buffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
+	GLfloat vertices[4][3] = { {-6.83, -3.84, 0.0}
+	, {-6.83, 3.84, 0.0}
+	, {6.83, 3.84, 0.0}
+	, {6.83, -3.84, 0.0}};
+
+	GLfloat tex_positions[4][2] = { {0.0, 0.0}
+	, {0.0, 1.0}
+	, {1.0, 1.0}
+	, {1.0, 0.0}};
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), NULL, GL_STATIC_DRAW);
+
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(tex_positions), tex_positions);
+
+	int vertex_loc = glGetAttribLocation(program, "position");
+	glVertexAttribPointer(vertex_loc, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(vertex_loc);
+
+	int tex_loc = glGetAttribLocation(program, "in_tex_coord");
+	glVertexAttribPointer(tex_loc, 2, GL_FLOAT, GL_FALSE, 0, sizeof(vertices));
+	glEnableVertexAttribArray(tex_loc);
+
+	glm::vec3 eye(0.0, -15.0, 15.0);
+	glm::vec3 center(0.0, 0.0, 0.0);
+	glm::vec3 up(0.0, 1.0, 1.0);
+	glm::mat4 view_mat = glm::lookAt(eye, center, glm::normalize(up));
+
+	glm::mat4 mvp_mat = glm::perspective(60.0f, 1.0f, 1.0f, 100.0f) * view_mat;
+
+	GLuint mvp_matr_loc = glGetUniformLocation(program, "mvp_matrix");
+
+	glUniformMatrix4fv(mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT,
+			(const void*) (0 * sizeof(GLuint)));
+	glFlush();
+}
+
+int main(int argc, char** argv) {
+	printf("%i", GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS);
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
+	glutInitWindowSize(512, 512);
+	glutInitContextVersion(3, 3);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
+	glutCreateWindow(argv[0]);
+
+	glewExperimental = GL_TRUE;
+
+	if (glewInit()) {
+		std::cerr << "Unable to initialize GLEW ... exiting" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	init();
+	glutDisplayFunc(display);
+	glutMainLoop();
+
+	glDeleteTextures(1, &tex);
+}
