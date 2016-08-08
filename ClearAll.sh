@@ -20,3 +20,7 @@ cd 5.\ Texture
 make clean
 cd ..
 
+cd 6.\ Cube\ movement
+make clean
+cd ..
+
