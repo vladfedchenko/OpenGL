@@ -8,10 +8,14 @@
 #include <ctime>
 #include <cmath>
 #include <sys/time.h>
+#include <string>
 
 #define WIDTH 1366
 #define HEIGHT 768
 #define SPEED 3500.0f
+#define CAMERA_SPEED 8000.0f
+
+#define FPS_RENEW_CYCLE 1000.0f //in miliseconds
 
 typedef struct PixelColorStruct
 {
@@ -21,7 +25,8 @@ typedef struct PixelColorStruct
 	unsigned char a;
 } PixelColor;
 
-unsigned long startTime;
+unsigned long prevTime;
+int framesRendered = 0;
 
 GLuint floorProgram;
 GLuint cubeProgram;
@@ -122,8 +127,8 @@ void generateAndFIllTexture(GLuint &tex)
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0); //base mipmap level
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0); //max mipmap levels
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	png_bytep *rows;
 	if (!readPngRows(rows, WIDTH, HEIGHT))
@@ -249,7 +254,7 @@ void init(void) {
 	initCube();
 }
 
-void renderFloor()
+void renderFloor(unsigned long timeSpan)
 {
 	glUseProgram(floorProgram);
 	glBindVertexArray(VAO);
@@ -259,9 +264,11 @@ void renderFloor()
 
 	glActiveTexture(GL_TEXTURE0);
 
-	glm::vec3 eye(0.0, -10.0, 10.0);
-	glm::vec3 center(0.0, 0.0, 0.0);
-	glm::vec3 up(0.0, 0.0, 1.0);
+	float translaionCoof = 10.0f + std::sin(timeSpan / CAMERA_SPEED * M_PI / 2.0) * 13.0f;
+
+	glm::vec3 eye(0.0f, -15.0f, translaionCoof);
+	glm::vec3 center(0.0f, 0.0f, 0.0f);
+	glm::vec3 up(0.0f, 0.0f, 1.0f);
 	glm::mat4 view_mat = glm::lookAt(eye, center, glm::normalize(up));
 
 	glm::mat4 mvp_mat = glm::perspective(45.0f, 16.0f/9.0f, 1.0f, 100.0f) * view_mat;
@@ -284,21 +291,19 @@ void renderFloor()
 	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (const void*) (0 * sizeof(GLuint)));
 }
 
-void renderCube()
+void renderCube(unsigned long timeSpan)
 {
 	glUseProgram(cubeProgram);
 	glBindVertexArray(cubeVAO);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeElArrayBuffer);
 
-	timeval tv;
-	gettimeofday(&tv, 0);
-
-	unsigned long timeSpan = (((unsigned long)tv.tv_sec * (unsigned long)1000) + tv.tv_usec / 1000) - startTime;
 	float translaionCoof = std::sin(timeSpan / SPEED * M_PI / 2.0) * 7;
 
 	float rotateAngle = M_PI * timeSpan / SPEED / 2.0;
 
+	float camTranslaionCoof = 10.0f + std::sin(timeSpan / CAMERA_SPEED * M_PI / 2.0) * 13.0f;
+		
 	//std::cout << "rotate angle: " << rotateAngle << std::endl;
 
 	//std::cout << "span: " << timeSpan << ", coof: " << translaionCoof << std::endl;
@@ -310,7 +315,7 @@ void renderCube()
 	glm::mat4 rotate_matr = glm::rotate(identity, rotateAngle * 360.0f / (float)M_PI, glm::vec3(0.0, 0.0, 1.0));
 	glm::mat3 rotate3(rotate_matr);
 
-	glm::vec3 eye(0.0f, -10.0f, 10.0f);
+	glm::vec3 eye(0.0f, -15.0f, camTranslaionCoof);
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 0.0f, 1.0f);
 	glm::mat4 view_mat = glm::lookAt(eye, center, glm::normalize(up));
@@ -374,24 +379,44 @@ void renderCube()
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	renderFloor();
+	//timeval tv;
+	//gettimeofday(&tv, 0);
 
-	renderCube();
+	//unsigned long timeSpan = (((unsigned long)tv.tv_sec * (unsigned long)1000) + tv.tv_usec / 1000) - startTime;
+	
+	unsigned long timeSpan = glutGet(GLUT_ELAPSED_TIME);
+
+	++framesRendered;
+	if (timeSpan - prevTime > FPS_RENEW_CYCLE)
+	{
+		float fps = (float)framesRendered * 1000.0f /(float)(timeSpan - prevTime);
+		glutSetWindowTitle(("FPS: " + std::to_string(fps)).c_str());
+
+		prevTime = timeSpan;
+		framesRendered = 0;
+	}
+
+	renderFloor(timeSpan);
+
+	renderCube(timeSpan);
 	glFlush();
+	glutSwapBuffers ();
 }
 
 int main(int argc, char** argv) {
 
-	timeval tv;
-	gettimeofday(&tv, 0);
+	//timeval tv;
+	//gettimeofday(&tv, 0);
 
-	startTime = ((unsigned long)tv.tv_sec * (unsigned long)1000) + tv.tv_usec / 1000;
+	//startTime = ((unsigned long)tv.tv_sec * (unsigned long)1000) + tv.tv_usec / 1000;
 
-	std::cout << startTime << " - strat time\n";
+	//std::cout << startTime << " - strat time\n";
+
+	prevTime = glutGet(GLUT_ELAPSED_TIME);
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(1280, 720);
+	glutInitWindowSize(854, 480); //480p
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutCreateWindow(argv[0]);
@@ -405,7 +430,7 @@ int main(int argc, char** argv) {
 
 	init();
 	glutDisplayFunc(display);
-	glutIdleFunc(display);
+	glutIdleFunc(glutPostRedisplay);
 	glutMainLoop();
 
 	glDeleteTextures(1, &tex);

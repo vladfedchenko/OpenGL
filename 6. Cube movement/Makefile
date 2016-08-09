@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c
+CFLAGS=-c -std=c++11
 LDFLAGS=-L/usr/lib/x86_64-linux-gnu -lglut -lGL -lGLU -lGLEW -lpng
 IFLAGS=-I/usr/include
 EXECUTABLE=draw
