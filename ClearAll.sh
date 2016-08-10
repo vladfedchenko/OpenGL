@@ -24,3 +24,7 @@ cd 6.\ Cube\ movement
 make clean
 cd ..
 
+cd 7.\ Camera\ movement
+make clean
+cd ..
+
