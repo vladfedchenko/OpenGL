@@ -9,6 +9,7 @@
 #include <cmath>
 #include <sys/time.h>
 #include <string>
+#include <map>
 
 #define WIDTH 1366
 #define HEIGHT 768
@@ -50,6 +51,8 @@ float windowHeight = 480.0f;
 glm::vec3 eye(0.0f, -15.0f, 15.0f);
 glm::vec3 center(0.0f, 0.0f, 0.0f);
 glm::vec3 up(0.0f, 15.0f, 15.0f);
+
+//std::map<unsigned char, bool> keyPressMap;
 
 bool readPngRows(png_bytep* &rows, int w, int h)
 {
@@ -137,8 +140,8 @@ void generateAndFIllTexture(GLuint &tex)
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0); //base mipmap level
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0); //max mipmap levels
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	png_bytep *rows;
 	if (!readPngRows(rows, WIDTH, HEIGHT))
@@ -469,6 +472,22 @@ void keyboardHandler(unsigned char key, int x, int y)
 		toMove = glm::normalize(glm::cross(up, tmp)) * (-STD_MOVE_COEF) * SHIFT_MULT;
 		positionChanged(toMove);
 		break;
+	case 'q':
+		toMove = -up * STD_MOVE_COEF;
+		positionChanged(toMove);
+		break;
+	case 'Q':
+		toMove = -up * STD_MOVE_COEF * SHIFT_MULT;
+		positionChanged(toMove);
+		break;
+	case 'e':
+		toMove = up * STD_MOVE_COEF;
+		positionChanged(toMove);
+		break;
+	case 'E':
+		toMove = up * STD_MOVE_COEF * SHIFT_MULT;
+		positionChanged(toMove);
+		break;
 	}
 }
 
@@ -504,6 +523,7 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(windowReshaped);
 
 	glutKeyboardFunc(keyboardHandler);
+	glutIgnoreKeyRepeat(1);
 
 	glutMainLoop();
 

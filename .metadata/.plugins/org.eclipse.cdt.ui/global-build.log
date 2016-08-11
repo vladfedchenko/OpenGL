@@ -1,13 +1,4 @@
-20:26:36 **** Incremental Build of configuration Debug for project 7. Camera movement ****
-make all 
-make: Nothing to be done for `all'.
-20:26:38 **** Incremental Build of configuration Debug for project 7. Camera movement ****
-make all 
-make: Nothing to be done for `all'.
-20:27:08 **** Incremental Build of configuration Debug for project 7. Camera movement ****
-make all 
-make: Nothing to be done for `all'.
-20:28:41 **** Incremental Build of configuration Debug for project 7. Camera movement ****
+13:04:54 **** Incremental Build of configuration Debug for project 7. Camera movement ****
 make all 
 Building file: ../main.cpp
 Invoking: Cross G++ Compiler

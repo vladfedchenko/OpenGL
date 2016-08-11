@@ -1,4 +1,4 @@
-20:28:41 **** Incremental Build of configuration Debug for project 7. Camera movement ****
+13:04:54 **** Incremental Build of configuration Debug for project 7. Camera movement ****
 make all 
 Building file: ../main.cpp
 Invoking: Cross G++ Compiler
@@ -64,5 +64,5 @@ g++  -o "7. Camera movement"  ./LoadShaders.o ./main.o   -lGL -lGLU -lGLEW -lglu
 Finished building target: 7. Camera movement
  
 
-20:28:43 Build Finished (took 1s.779ms)
+13:04:57 Build Finished (took 2s.273ms)
 
