@@ -14,12 +14,11 @@
 #define WIDTH 1366
 #define HEIGHT 768
 #define SPEED 3500.0f
-#define CAMERA_SPEED 8000.0f
 
 #define FPS_RENEW_CYCLE 1000.0f //in miliseconds
 
-#define STD_MOVE_COEF 0.1f
-#define SHIFT_MULT 5.0f;
+#define STD_MOVE_COEF 1.0f
+#define SHIFT_MULT 5.0f
 
 typedef struct PixelColorStruct
 {
@@ -29,7 +28,7 @@ typedef struct PixelColorStruct
 	unsigned char a;
 } PixelColor;
 
-unsigned long prevTime;
+unsigned long prevTime, lastFrameTime;
 int framesRendered = 0;
 
 GLuint floorProgram;
@@ -52,7 +51,8 @@ glm::vec3 eye(0.0f, -15.0f, 15.0f);
 glm::vec3 center(0.0f, 0.0f, 0.0f);
 glm::vec3 up(0.0f, 15.0f, 15.0f);
 
-//std::map<unsigned char, bool> keyPressMap;
+std::map<unsigned char, bool> keyPressMap;
+bool shiftDown = false;
 
 bool readPngRows(png_bytep* &rows, int w, int h)
 {
@@ -241,9 +241,118 @@ void initCube()
 	}
 }
 
+void positionChanged(glm::vec3 &toMove)
+{
+	eye += toMove;
+	center += toMove;
+	glutPostRedisplay();
+}
+
+void keyDownHandler(unsigned char key, int x, int y)
+{
+	//std::cout << "Pressed: " << key << ". x, y: " << x << ", " << y << std::endl;
+
+	switch(key)
+	{
+	case 'w':
+	case 'W':
+		keyPressMap['w'] = true;
+		break;
+	case 's':
+	case 'S':
+		keyPressMap['s'] = true;
+		break;
+	case 'a':
+	case 'A':
+		keyPressMap['a'] = true;
+		break;
+	case 'd':
+	case 'D':
+		keyPressMap['d'] = true;
+		break;
+	case 'q':
+	case 'Q':
+		keyPressMap['q'] = true;
+		break;
+	case 'e':
+	case 'E':
+		keyPressMap['e'] = true;
+		break;
+	}
+}
+
+void keyUpHandler(unsigned char key, int x, int y)
+{
+	//std::cout << "Released: " << key << ". x, y: " << x << ", " << y << std::endl;
+	switch(key)
+	{
+	case 'w':
+	case 'W':
+		keyPressMap['w'] = false;
+		break;
+	case 's':
+	case 'S':
+		keyPressMap['s'] = false;
+		break;
+	case 'a':
+	case 'A':
+		keyPressMap['a'] = false;
+		break;
+	case 'd':
+	case 'D':
+		keyPressMap['d'] = false;
+		break;
+	case 'q':
+	case 'Q':
+		keyPressMap['q'] = false;
+		break;
+	case 'e':
+	case 'E':
+		keyPressMap['e'] = false;
+		break;
+	}
+}
+
+void specialDownHandler(int code, int x, int y)
+{
+	if (code == GLUT_KEY_SHIFT_L)
+	{
+		shiftDown = true;
+	}
+}
+
+void specialUpHandler(int code, int x, int y)
+{
+	if (code == GLUT_KEY_SHIFT_L)
+	{
+		shiftDown = false;
+	}
+}
+
+void initCameraMovement()
+{
+	up = glm::normalize(up);
+
+	keyPressMap['q'] = false;
+	keyPressMap['w'] = false;
+	keyPressMap['e'] = false;
+	keyPressMap['a'] = false;
+	keyPressMap['s'] = false;
+	keyPressMap['d'] = false;
+
+	glutKeyboardFunc(keyDownHandler);
+	glutKeyboardUpFunc(keyUpHandler);
+
+	glutSpecialFunc(specialDownHandler);
+	glutSpecialUpFunc(specialUpHandler);
+
+	glutIgnoreKeyRepeat(1);
+}
+
+
 void init(void) {
 
-	up = glm::normalize(up);
+	initCameraMovement();
 
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -279,8 +388,6 @@ void renderFloor(unsigned long timeSpan)
 
 	glActiveTexture(GL_TEXTURE0);
 
-	//float translaionCoof = 10.0f + std::sin(timeSpan / CAMERA_SPEED * M_PI / 2.0) * 13.0f;
-
 	glm::mat4 view_mat = glm::lookAt(eye, center, up);
 
 	glm::mat4 mvp_mat = glm::perspective(45.0f, windowWidth / windowHeight, 1.0f, 100.0f) * view_mat;
@@ -313,8 +420,6 @@ void renderCube(unsigned long timeSpan)
 	float translaionCoof = std::sin(timeSpan / SPEED * M_PI / 2.0) * 7;
 
 	float rotateAngle = M_PI * timeSpan / SPEED / 2.0;
-
-	//float camTranslaionCoof = 10.0f + std::sin(timeSpan / CAMERA_SPEED * M_PI / 2.0) * 13.0f;
 		
 	//std::cout << "rotate angle: " << rotateAngle << std::endl;
 
@@ -385,15 +490,55 @@ void renderCube(unsigned long timeSpan)
 	}
 }
 
+float getMoveCoof(unsigned long timePassed)
+{
+	float base = shiftDown ? (STD_MOVE_COEF * SHIFT_MULT) : (STD_MOVE_COEF);
+	return base * (float)(timePassed / 1000.0f);
+}
+
+void moveCameraIfNeeded(unsigned long timePassed)
+{
+	float moveDistCoof = getMoveCoof(timePassed);
+
+	glm::vec3 tmp;
+	glm::vec3 toMove(0.0f, 0.0f, 0.0f);
+	if (keyPressMap['a'])
+	{
+		tmp = glm::normalize(center - eye);
+		toMove += glm::normalize(glm::cross(up, tmp)) * moveDistCoof;
+	}
+	if (keyPressMap['d'])
+	{
+		tmp = glm::normalize(center - eye);
+		toMove -= glm::normalize(glm::cross(up, tmp)) * moveDistCoof;
+	}
+	if (keyPressMap['w'])
+	{
+		toMove += glm::normalize(center - eye) * moveDistCoof;
+	}
+	if (keyPressMap['s'])
+	{
+		toMove -= glm::normalize(center - eye) * moveDistCoof;
+	}
+	if (keyPressMap['e'])
+	{
+		toMove += up * moveDistCoof;
+	}
+	if (keyPressMap['q'])
+	{
+		toMove -= up * moveDistCoof;
+	}
+
+	positionChanged(toMove);
+}
+
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//timeval tv;
-	//gettimeofday(&tv, 0);
-
-	//unsigned long timeSpan = (((unsigned long)tv.tv_sec * (unsigned long)1000) + tv.tv_usec / 1000) - startTime;
 	
 	unsigned long timeSpan = glutGet(GLUT_ELAPSED_TIME);
+
+	moveCameraIfNeeded(timeSpan - lastFrameTime);
+	lastFrameTime = timeSpan;
 
 	++framesRendered;
 	if (timeSpan - prevTime > FPS_RENEW_CYCLE)
@@ -421,76 +566,6 @@ void windowReshaped(int x, int y)
 	glutPostRedisplay();
 }
 
-void positionChanged(glm::vec3 &toMove)
-{
-	eye += toMove;
-	center += toMove;
-	glutPostRedisplay();
-}
-
-void keyboardHandler(unsigned char key, int x, int y)
-{
-	std::cout << "Key event: " << key << ". x, y: " << x << ", " << y << std::endl;
-
-	glm::vec3 toMove;
-	glm::vec3 tmp;
-	switch(key)
-	{
-	case 'w':
-		toMove = glm::normalize(center - eye) * STD_MOVE_COEF;
-		positionChanged(toMove);
-		break;
-	case 's':
-		toMove = glm::normalize(center - eye) * (-STD_MOVE_COEF);
-		positionChanged(toMove);
-		break;
-	case 'W':
-		toMove = glm::normalize(center - eye) * STD_MOVE_COEF * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	case 'S':
-		toMove = glm::normalize(center - eye) * (-STD_MOVE_COEF) * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	case 'a':
-		tmp = glm::normalize(center - eye);
-		toMove = glm::normalize(glm::cross(up, tmp)) * STD_MOVE_COEF;
-		positionChanged(toMove);
-		break;
-	case 'A':
-		tmp = glm::normalize(center - eye);
-		toMove = glm::normalize(glm::cross(up, tmp)) * STD_MOVE_COEF * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	case 'd':
-		tmp = glm::normalize(center - eye);
-		toMove = glm::normalize(glm::cross(up, tmp)) * (-STD_MOVE_COEF);
-		positionChanged(toMove);
-		break;
-	case 'D':
-		tmp = glm::normalize(center - eye);
-		toMove = glm::normalize(glm::cross(up, tmp)) * (-STD_MOVE_COEF) * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	case 'q':
-		toMove = -up * STD_MOVE_COEF;
-		positionChanged(toMove);
-		break;
-	case 'Q':
-		toMove = -up * STD_MOVE_COEF * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	case 'e':
-		toMove = up * STD_MOVE_COEF;
-		positionChanged(toMove);
-		break;
-	case 'E':
-		toMove = up * STD_MOVE_COEF * SHIFT_MULT;
-		positionChanged(toMove);
-		break;
-	}
-}
-
 int main(int argc, char** argv) {
 
 	//timeval tv;
@@ -501,6 +576,7 @@ int main(int argc, char** argv) {
 	//std::cout << startTime << " - strat time\n";
 
 	prevTime = glutGet(GLUT_ELAPSED_TIME);
+	lastFrameTime = prevTime;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
@@ -521,9 +597,6 @@ int main(int argc, char** argv) {
 	glutIdleFunc(glutPostRedisplay);
 
 	glutReshapeFunc(windowReshaped);
-
-	glutKeyboardFunc(keyboardHandler);
-	glutIgnoreKeyRepeat(1);
 
 	glutMainLoop();
 
