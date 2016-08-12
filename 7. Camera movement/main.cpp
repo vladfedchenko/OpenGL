@@ -58,6 +58,7 @@ int prevX, prevY;
 
 std::map<unsigned char, bool> keyPressMap;
 bool shiftDown = false;
+bool arcballModeActive = true;
 
 bool readPngRows(png_bytep* &rows, int w, int h)
 {
@@ -282,6 +283,9 @@ void keyDownHandler(unsigned char key, int x, int y)
 	case 'e':
 	case 'E':
 		keyPressMap['e'] = true;
+		break;
+	case 'f':
+		arcballModeActive = !arcballModeActive;
 		break;
 	}
 }
@@ -571,10 +575,10 @@ void windowReshaped(int x, int y)
 	glutPostRedisplay();
 }
 
-void translateAzimuth(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+void translateAzimuthArcball(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
 {
 	glm::mat4 identity(1.0f);
-	glm::mat4 rotMatr = glm::rotate(identity, angle, glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotMatr = glm::rotate(identity, angle, glm::vec3(0.0f, 0.0f, -1.0f));
 
 	glm::vec4 homo_eye(trans_eye, 1.0);
 	glm::vec4 homo_center(trans_center, 1.0);
@@ -585,10 +589,10 @@ void translateAzimuth(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &
 	trans_up = glm::vec3(rotMatr * homo_up);
 }
 
-void translatePolar(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+void translatePolarArcball(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
 {
 	glm::mat4 identity(1.0f);
-	glm::vec3 right = glm::cross(glm::normalize(trans_center - trans_eye), trans_up);
+	glm::vec3 right = glm::cross(trans_up, glm::normalize(trans_center - trans_eye));
 	right = glm::normalize(right);
 
 	glm::mat4 rotMatr = glm::rotate(identity, angle, right);
@@ -602,6 +606,41 @@ void translatePolar(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &tr
 	trans_up = glm::vec3(rotMatr * homo_up);
 }
 
+void translateHorizontalNormalCam(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+{
+	trans_center -= trans_eye;
+
+	glm::mat4 identity(1.0f);
+	glm::mat4 rotMatr = glm::rotate(identity, angle, glm::vec3(0.0f, 0.0f, -1.0f));
+
+	glm::vec4 homo_center(trans_center, 1.0);
+	glm::vec4 homo_up(trans_up, 1.0);
+
+	trans_center = glm::vec3(rotMatr * homo_center);
+	trans_up = glm::vec3(rotMatr * homo_up);
+
+	trans_center += trans_eye;
+}
+
+void translateVerticalNormalCam(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+{
+	glm::vec3 right = glm::cross(trans_up, glm::normalize(trans_center - trans_eye));
+	right = glm::normalize(right);
+
+	trans_center -= trans_eye;
+
+	glm::mat4 identity(1.0f);
+	glm::mat4 rotMatr = glm::rotate(identity, angle, right);
+
+	glm::vec4 homo_center(trans_center, 1.0);
+	glm::vec4 homo_up(trans_up, 1.0);
+
+	trans_center = glm::vec3(rotMatr * homo_center);
+	trans_up = glm::vec3(rotMatr * homo_up);
+
+	trans_center += trans_eye;
+}
+
 void mouseMotionHandler(int x, int y)
 {
 	//std::cout << "Coords: " << x << ", " << y << std::endl;
@@ -611,11 +650,25 @@ void mouseMotionHandler(int x, int y)
 
 	if (x != prevX)
 	{
-		translateAzimuth(eye, center, up, (x - prevX) * CAM_ROT_COEF);
+		if (arcballModeActive)
+		{
+			translateAzimuthArcball(eye, center, up, (x - prevX) * CAM_ROT_COEF);
+		}
+		else
+		{
+			translateHorizontalNormalCam(eye, center, up, (x - prevX) * CAM_ROT_COEF);
+		}
 	}
 	if (y != prevY)
 	{
-		translatePolar(eye, center, up, (y - prevY) * CAM_ROT_COEF);
+		if (arcballModeActive)
+		{
+			translatePolarArcball(eye, center, up, (y - prevY) * CAM_ROT_COEF);
+		}
+		else
+		{
+			translateVerticalNormalCam(eye, center, up, (y - prevY) * CAM_ROT_COEF);
+		}
 	}
 
 	eye += rotationCenter;

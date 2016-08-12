@@ -1,6 +1,6 @@
-12:47:46 **** Incremental Build of configuration Debug for project 7. Camera movement ****
+21:24:57 **** Incremental Build of configuration Debug for project 7. Camera movement ****
 make all 
 make: Nothing to be done for `all'.
 
-12:47:46 Build Finished (took 71ms)
+21:24:57 Build Finished (took 64ms)
 
