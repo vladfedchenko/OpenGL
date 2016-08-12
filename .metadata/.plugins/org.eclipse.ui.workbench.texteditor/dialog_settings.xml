@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="257" key="DIALOG_WIDTH"/>
-		<item value="316" key="DIALOG_Y_ORIGIN"/>
-		<item value="0" key="DIALOG_X_ORIGIN"/>
-		<item value="427" key="DIALOG_HEIGHT"/>
+		<item value="263" key="DIALOG_WIDTH"/>
+		<item value="220" key="DIALOG_Y_ORIGIN"/>
+		<item value="429" key="DIALOG_HEIGHT"/>
+		<item value="1035" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Noto Sans|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="windowWi" key="selection"/>
+		<item value="base" key="selection"/>
 		<list key="findhistory">
+			<item value="base"/>
+			<item value="CAMERA_SPEED"/>
+			<item value="5.0"/>
+			<item value="NEAREST"/>
 			<item value="windowWi"/>
 			<item value="generateAndFIllTexture"/>
 			<item value="NumVertices"/>

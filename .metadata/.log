@@ -5857,3 +5857,92 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/7. Camera move
 !MESSAGE Resource '/7. Camera movement/Debug/makefile' does not exist.
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2016-08-11 12:46:00.917
 !MESSAGE Resource '/7. Camera movement/Debug/makefile' does not exist.
+!SESSION 2016-08-11 18:49:43.702 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.ui 2 0 2016-08-11 18:50:30.934
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-11 18:50:30.934
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.ui 2 0 2016-08-11 18:50:32.783
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-11 18:50:32.784
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.cdt.debug.core 4 104 2016-08-11 19:59:23.131
+!MESSAGE The program file specified in the launch configuration does not exist
+!STACK 0
+java.io.FileNotFoundException: /home/vladfedchenko/Documents/Github/OpenGL/7. Camera movement/Debug/7. Camera movement not found
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:659)
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:675)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.runLocalApplication(LocalCDILaunchDelegate.java:85)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launch(LocalCDILaunchDelegate.java:71)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:858)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:707)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1018)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1222)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SESSION 2016-08-11 20:15:42.077 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-08-11 20:15:49.901
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2016-08-11 20:15:52.608
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-11 20:15:52.608
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.ui 2 0 2016-08-11 20:15:54.061
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-11 20:15:54.061
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.jface 2 0 2016-08-11 20:26:47.438
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2016-08-11 20:26:47.438
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@45920f02,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@78176ffc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+!SESSION 2016-08-12 11:07:33.735 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.ui 2 0 2016-08-12 11:07:40.511
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-12 11:07:40.511
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.ui 2 0 2016-08-12 11:07:42.268
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-08-12 11:07:42.268
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'

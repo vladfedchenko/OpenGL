@@ -20,6 +20,8 @@
 #define STD_MOVE_COEF 1.0f
 #define SHIFT_MULT 5.0f
 
+#define CAM_ROT_COEF 0.36f // = 180 / 500
+
 typedef struct PixelColorStruct
 {
 	unsigned char r;
@@ -50,6 +52,9 @@ float windowHeight = 480.0f;
 glm::vec3 eye(0.0f, -15.0f, 15.0f);
 glm::vec3 center(0.0f, 0.0f, 0.0f);
 glm::vec3 up(0.0f, 15.0f, 15.0f);
+
+glm::vec3 rotationCenter(0.0f, 0.0f, 0.0f);
+int prevX, prevY;
 
 std::map<unsigned char, bool> keyPressMap;
 bool shiftDown = false;
@@ -566,6 +571,71 @@ void windowReshaped(int x, int y)
 	glutPostRedisplay();
 }
 
+void translateAzimuth(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+{
+	glm::mat4 identity(1.0f);
+	glm::mat4 rotMatr = glm::rotate(identity, angle, glm::vec3(0.0f, 0.0f, 1.0f));
+
+	glm::vec4 homo_eye(trans_eye, 1.0);
+	glm::vec4 homo_center(trans_center, 1.0);
+	glm::vec4 homo_up(trans_up, 1.0);
+
+	trans_eye = glm::vec3(rotMatr * homo_eye);
+	trans_center = glm::vec3(rotMatr * homo_center);
+	trans_up = glm::vec3(rotMatr * homo_up);
+}
+
+void translatePolar(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle)
+{
+	glm::mat4 identity(1.0f);
+	glm::vec3 right = glm::cross(glm::normalize(trans_center - trans_eye), trans_up);
+	right = glm::normalize(right);
+
+	glm::mat4 rotMatr = glm::rotate(identity, angle, right);
+
+	glm::vec4 homo_eye(trans_eye, 1.0);
+	glm::vec4 homo_center(trans_center, 1.0);
+	glm::vec4 homo_up(trans_up, 1.0);
+
+	trans_eye = glm::vec3(rotMatr * homo_eye);
+	trans_center = glm::vec3(rotMatr * homo_center);
+	trans_up = glm::vec3(rotMatr * homo_up);
+}
+
+void mouseMotionHandler(int x, int y)
+{
+	//std::cout << "Coords: " << x << ", " << y << std::endl;
+
+	eye - rotationCenter;
+	center - rotationCenter;
+
+	if (x != prevX)
+	{
+		translateAzimuth(eye, center, up, (x - prevX) * CAM_ROT_COEF);
+	}
+	if (y != prevY)
+	{
+		translatePolar(eye, center, up, (y - prevY) * CAM_ROT_COEF);
+	}
+
+	eye += rotationCenter;
+	center += rotationCenter;
+
+	prevX = x;
+	prevY = y;
+
+	glutPostRedisplay();
+}
+
+void mousePressHandler(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		prevX = x;
+		prevY = y;
+	}
+}
+
 int main(int argc, char** argv) {
 
 	//timeval tv;
@@ -597,6 +667,9 @@ int main(int argc, char** argv) {
 	glutIdleFunc(glutPostRedisplay);
 
 	glutReshapeFunc(windowReshaped);
+
+	glutMotionFunc(mouseMotionHandler);
+	glutMouseFunc(mousePressHandler);
 
 	glutMainLoop();
 
