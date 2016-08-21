@@ -1,0 +1,20 @@
+/*
+ * CubeRenderObject.h
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+namespace VladFedchenko{
+namespace GL{
+namespace RenderObjects{
+
+	class CubeRenderObject : public VladFedchenko::GL::RenderObject, public VladFedchenko::GL::ElementedObject
+	{
+	public:
+		CubeRenderObject(Camera *camera);
+
+		void Render(unsigned long timeSpan);
+	};
+
+}}}

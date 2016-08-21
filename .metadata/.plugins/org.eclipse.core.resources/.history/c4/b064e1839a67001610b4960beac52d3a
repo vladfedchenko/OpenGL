@@ -1,0 +1,44 @@
+/*
+ * RenderObject.cpp
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include "../Headers/RenderObject.h"
+
+namespace VladFedchenko{
+namespace GL{
+
+// RenderObject region
+
+	RenderObject::RenderObject(unsigned int vboCount)
+		: vboCount(vboCount)
+	{
+		this->vbos= new GLuint[vboCount];
+	}
+
+	RenderObject::~RenderObject()
+	{
+		delete this->vbos;
+	}
+
+// end RenderObject region
+
+// TexturedRenderObject region
+
+	TexturedRenderObject::TexturedRenderObject(unsigned int texCount)
+		: texCount(texCount)
+	{
+		this->textures = new GLuint[this->texCount];
+	}
+
+	TexturedRenderObject::~TexturedRenderObject()
+	{
+		delete this->textures;
+	}
+
+// end TexturedRenderObject region
+
+}}
+

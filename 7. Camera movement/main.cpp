@@ -32,6 +32,7 @@ typedef struct PixelColorStruct
 
 unsigned long prevTime, lastFrameTime;
 int framesRendered = 0;
+float fps = 0.0f;
 
 GLuint floorProgram;
 GLuint cubeProgram;
@@ -479,11 +480,12 @@ void renderCube(unsigned long timeSpan)
 	GLuint str_loc = glGetUniformLocation(cubeProgram, "ReflStrength");
 	glUniform1f(str_loc, strenght);
 
+	int vertex_loc = glGetAttribLocation(cubeProgram, "position");
+
 	for (int i = 0; i < 6; ++i)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, cubeBuffers[i]);
 
-		int vertex_loc = glGetAttribLocation(cubeProgram, "position");
 		glVertexAttribPointer(vertex_loc, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 		glEnableVertexAttribArray(vertex_loc);
 
@@ -541,8 +543,23 @@ void moveCameraIfNeeded(unsigned long timePassed)
 	positionChanged(toMove);
 }
 
+void drawBitmapText(char *string, int x, int y)
+{
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+	char *c;
+	glWindowPos2i(x, y);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	for (c = string; *c != '\0'; ++c)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+	}
+}
+
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glLoadIdentity();
 	
 	unsigned long timeSpan = glutGet(GLUT_ELAPSED_TIME);
 
@@ -552,16 +569,21 @@ void display() {
 	++framesRendered;
 	if (timeSpan - prevTime > FPS_RENEW_CYCLE)
 	{
-		float fps = (float)framesRendered * 1000.0f /(float)(timeSpan - prevTime);
+		fps = (float)framesRendered * 1000.0f /(float)(timeSpan - prevTime);
 		glutSetWindowTitle(("FPS: " + std::to_string(fps)).c_str());
 
 		prevTime = timeSpan;
 		framesRendered = 0;
 	}
 
+
+
 	renderFloor(timeSpan);
 
 	renderCube(timeSpan);
+
+	drawBitmapText((char*)"Vlad", 20, 20);
+
 	glFlush();
 	glutSwapBuffers ();
 }

@@ -1,0 +1,28 @@
+/*
+ * ShaderProgram.h
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include <GL/gl.h>
+
+namespace VladFedchenko{
+namespace GL{
+
+	typedef struct {
+		GLenum type;
+		const char* filename;
+	} ShaderInfo;
+
+	class ShaderProgram
+	{
+	protected:
+		GLuint program = 0;
+
+	public:
+
+		ShaderProgram();
+	};
+
+}}

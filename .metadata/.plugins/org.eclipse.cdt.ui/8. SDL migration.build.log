@@ -1,0 +1,7 @@
+23:44:36 **** Clean-only build of configuration Debug for project 8. SDL migration ****
+make clean 
+rm -rf  ./Source/RenderObjects/CubeRenderObject.o  ./Source/Camera.o ./Source/RenderObject.o ./Source/ShaderProgram.o  ./Source/RenderObjects/CubeRenderObject.d  ./Source/Camera.d ./Source/RenderObject.d ./Source/ShaderProgram.d  "8. SDL migration"
+ 
+
+23:44:36 Build Finished (took 77ms)
+

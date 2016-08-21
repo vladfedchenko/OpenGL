@@ -1,0 +1,24 @@
+/*
+ * RenderObject.h
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include <GL/gl.h>
+
+namespace VladFedchenko.GL
+{
+
+	class RenderObject
+	{
+	protected:
+		GLuint program;
+		GLuint vao;
+		GLuint vbos[];
+
+	public:
+
+	};
+
+}

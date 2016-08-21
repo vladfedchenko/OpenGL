@@ -1,0 +1,18 @@
+/*
+ * Camera.h
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include <glm/glm.hpp>
+
+namespace VladFedchenko.GL{
+namespace GL{
+
+	class Camera
+	{
+		//glm::
+	};
+
+}}

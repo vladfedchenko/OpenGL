@@ -1,0 +1,51 @@
+/*
+ * RenderObject.h
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include <GL/gl.h>
+
+namespace VladFedchenko{
+namespace GL{
+
+	class RenderObject
+	{
+	protected:
+		GLuint program = 0;
+		GLuint vao = 0;
+		GLuint *vbos = nullptr;
+		unsigned int vboCount;
+
+	public:
+
+		RenderObject(unsigned int vboCount);
+		virtual ~RenderObject();
+
+	};
+
+	class StaticRenderObject : public RenderObject
+	{
+	public:
+
+		virtual void Render() = 0;
+	};
+
+	class AnimatedRenderObject : public RenderObject
+	{
+	public:
+
+		virtual void Render(unsigned long timeSpan) = 0;
+	};
+
+	class TexturedRenderObject
+	{
+	protected:
+		GLuint *textures;
+		unsigned int texCount;
+
+
+	};
+
+}}

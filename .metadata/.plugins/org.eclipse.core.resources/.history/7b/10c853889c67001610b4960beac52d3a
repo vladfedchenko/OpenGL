@@ -1,0 +1,26 @@
+/*
+ * Camera.cpp
+ *
+ *  Created on: Aug 21, 2016
+ *      Author: vladfedchenko
+ */
+
+#include "../Headers/Camera.h"
+
+namespace VladFedchenko{
+namespace GL{
+
+	Camera::Camera()
+	{
+
+	}
+
+	Camera::~Camera()
+	{
+
+	}
+
+}}
+
+
+
