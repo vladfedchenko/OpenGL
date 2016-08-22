@@ -11,9 +11,12 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include "Camera.h"
+#include "ShaderProgram.h"
 
 namespace VladFedchenko{
 namespace GL{
+
+	class ShaderProgram;
 
 	class RenderObject
 	{
@@ -29,7 +32,7 @@ namespace GL{
 		RenderObject(unsigned int vboCount, Camera *camera);
 		virtual ~RenderObject();
 
-		virtual void Render(unsigned long timeSpan) = 0;
+		virtual void Render(unsigned long timeSpan, const VladFedchenko::GL::ShaderProgram &parentProgram) = 0;
 
 	};
 

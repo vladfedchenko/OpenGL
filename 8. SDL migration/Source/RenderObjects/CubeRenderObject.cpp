@@ -9,6 +9,7 @@
 #include "../RenderObject.h"
 #include "../Camera.h"
 #include <cmath>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace VladFedchenko::GL;
 
@@ -63,7 +64,7 @@ namespace RenderObjects{
 		}
 	}
 
-	void CubeRenderObject::Render(unsigned long timeSpan)
+	void CubeRenderObject::Render(unsigned long timeSpan, const VladFedchenko::GL::ShaderProgram &parentProgram)
 	{
 		glBindVertexArray(this->vao);
 
@@ -81,11 +82,31 @@ namespace RenderObjects{
 
 		glm::mat4 mvp_mat = this->camera->GetVPMatr() * model_matr * rotate_matr;
 
-//		GLuint normal_transform_matr_loc = glGetUniformLocation(cubeProgram, "normal_transform_matr");
-//		glUniformMatrix3fv(normal_transform_matr_loc, 1, GL_FALSE, glm::value_ptr(rotate3));
-//
-//		GLuint vertex_mvp_matr_loc = glGetUniformLocation(cubeProgram, "vertex_mvp_matr");
-//		glUniformMatrix4fv(vertex_mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
+		GLuint normal_transform_matr_loc = glGetUniformLocation(parentProgram.GetProgram(), "normal_transform_matr");
+		glUniformMatrix3fv(normal_transform_matr_loc, 1, GL_FALSE, glm::value_ptr(rotate3));
+
+		GLuint vertex_mvp_matr_loc = glGetUniformLocation(parentProgram.GetProgram(), "vertex_mvp_matr");
+		glUniformMatrix4fv(vertex_mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
+
+		int vertex_loc = glGetAttribLocation(parentProgram.GetProgram(), "position");
+		int normal_loc = glGetAttribLocation(parentProgram.GetProgram(), "normal");
+		int tex_loc = glGetAttribLocation(parentProgram.GetProgram(), "in_tex_coord");
+
+		for (int i = 0; i < 6; ++i)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, this->vbos[i]);
+
+			glVertexAttribPointer(vertex_loc, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+			glEnableVertexAttribArray(vertex_loc);
+
+			glVertexAttribPointer(normal_loc, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)(sizeof(GLfloat) * 12));
+			glEnableVertexAttribArray(normal_loc);
+
+			glVertexAttribPointer(tex_loc, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)(sizeof(GLfloat) * 12 * 2));
+			glEnableVertexAttribArray(tex_loc);
+
+			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (const void*) (0 * sizeof(GLuint)));
+		}
 	}
 
 }}}

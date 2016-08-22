@@ -9,6 +9,11 @@
 #define GLWINDOW_H_
 
 #include <SDL2/SDL.h>
+#include <vector>
+#include "ShaderProgram.h"
+
+#define WIDTH 1366
+#define HEIGHT 768
 
 namespace VladFedchenko{
 namespace GL{
@@ -16,8 +21,23 @@ namespace GL{
 	class GLWindow
 	{
 	private:
-		SDL_Window *mainWindow = nullptr;
+		SDL_Window *mainWindow;
 		SDL_GLContext mainContext;
+
+		std::vector<VladFedchenko::GL::ShaderProgram*> programs;
+
+		bool Init();
+		void CheckSDLError();
+		bool SetOpenGLAttributes();
+
+	public:
+		GLWindow();
+		~GLWindow();
+
+		void AddProgram(VladFedchenko::GL::ShaderProgram* program);
+		bool RemoveProgram(VladFedchenko::GL::ShaderProgram* program);
+
+		void MainLoop();
 	};
 
 }}

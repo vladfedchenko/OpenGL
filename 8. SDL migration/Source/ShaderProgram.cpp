@@ -125,10 +125,15 @@ namespace GL{
 
 		for (RenderObject* obj : this->objectsToRender)
 		{
-			obj->Render(timeSpan);
+			obj->Render(timeSpan, *this);
 		}
 
 		glUseProgram(0);
+	}
+
+	GLuint ShaderProgram::GetProgram() const
+	{
+		return this->program;
 	}
 
 }}

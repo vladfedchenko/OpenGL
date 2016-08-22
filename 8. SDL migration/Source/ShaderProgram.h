@@ -17,6 +17,8 @@
 namespace VladFedchenko{
 namespace GL{
 
+	class RenderObject;
+
 	typedef struct {
 		GLenum type;
 		const char* filename;
@@ -24,13 +26,13 @@ namespace GL{
 
 	class ShaderProgram
 	{
-	private:
-		GLuint program = 0;
-		std::vector<VladFedchenko::GL::RenderObject*> objectsToRender;
 
 	private:
 		void ReadShader(const char* filename, std::string &s);
 
+	protected:
+		GLuint program;
+		std::vector<VladFedchenko::GL::RenderObject*> objectsToRender;
 		virtual void EnableUniformLocations() = 0;
 
 	public:
@@ -43,6 +45,8 @@ namespace GL{
 		bool RemoveObject(VladFedchenko::GL::RenderObject *object);
 
 		void RenderObjects(unsigned long timeSpan);
+
+		GLuint GetProgram() const;
 	};
 
 }}
