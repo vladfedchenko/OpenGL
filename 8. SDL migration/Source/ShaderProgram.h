@@ -41,10 +41,10 @@ namespace GL{
 		ShaderProgram(GLuint program);
 		virtual ~ShaderProgram();
 
-		void AddObject(VladFedchenko::GL::RenderObject *object);
+		virtual void AddObject(VladFedchenko::GL::RenderObject *object);
 		bool RemoveObject(VladFedchenko::GL::RenderObject *object);
 
-		void RenderObjects(unsigned long timeSpan);
+		virtual void RenderObjects(unsigned long timeSpan);
 
 		GLuint GetProgram() const;
 	};

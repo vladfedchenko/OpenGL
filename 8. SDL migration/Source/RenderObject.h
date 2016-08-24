@@ -12,6 +12,7 @@
 #include <GL/gl.h>
 #include "Camera.h"
 #include "ShaderProgram.h"
+#include "Helpers/PNGHelper.h"
 
 namespace VladFedchenko{
 namespace GL{
@@ -32,7 +33,7 @@ namespace GL{
 		RenderObject(unsigned int vboCount, Camera *camera);
 		virtual ~RenderObject();
 
-		virtual void Render(unsigned long timeSpan, const VladFedchenko::GL::ShaderProgram &parentProgram) = 0;
+		virtual void Render(unsigned long timeSpan, const GLuint &parentProgram) = 0;
 
 	};
 
@@ -41,6 +42,8 @@ namespace GL{
 	protected:
 		GLuint *textures = nullptr;
 		unsigned int texCount;
+
+		virtual void FillTexture2D(GLuint &tex, VladFedchenko::GL::Helpers::PixelColor *colors, int w, int h);
 
 	public:
 		TexturedObject(unsigned int texCount);

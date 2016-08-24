@@ -12,8 +12,8 @@
 #include <vector>
 #include "ShaderProgram.h"
 
-#define WIDTH 1366
-#define HEIGHT 768
+#define WIDTH 854
+#define HEIGHT 480
 
 namespace VladFedchenko{
 namespace GL{

@@ -25,7 +25,7 @@ namespace RenderObjects{
 	public:
 		CubeRenderObject(VladFedchenko::GL::Camera *camera);
 
-		void Render(unsigned long timeSpan, const VladFedchenko::GL::ShaderProgram &parentProgram);
+		void Render(unsigned long timeSpan, const GLuint &parentProgram);
 	};
 
 }}}

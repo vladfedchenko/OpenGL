@@ -8,7 +8,9 @@
 #include "GLWindow.h"
 #include <iostream>
 #include "ShaderPrograms/ClassicLMTexGenShader.h"
+#include "ShaderPrograms/ClassicLMTexLoadShader.h"
 #include "RenderObjects/CubeRenderObject.h"
+#include "RenderObjects/FloorRenderObject.h"
 
 using namespace VladFedchenko::GL;
 
@@ -159,8 +161,11 @@ int main(int argc, char** argv)
 {
 	GLWindow window;
 
-	ShaderInfo shaders[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/cube.vert" },
+	ShaderInfo shadersCube[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/cube.vert" },
 		{GL_FRAGMENT_SHADER, "Source/GLSLShaders/cube.frag" }};
+
+	ShaderInfo shadersFloor[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/floor.vert" },
+			{GL_FRAGMENT_SHADER, "Source/GLSLShaders/floor.frag" }};
 
 
 	glm::vec3 eye(0.0f, -15.0f, 15.0f);
@@ -168,17 +173,26 @@ int main(int argc, char** argv)
 	glm::vec3 up(0.0f, 15.0f, 15.0f);
 	Camera *cam = new Camera(eye, center, up, 45.0f, (float)WIDTH/ (float)HEIGHT, 1.0f, 100.0f);
 
-	ShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shaders, 2, cam);
+	ShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shadersCube, 2, cam);
+	ShaderProgram *floorProg = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexLoadShader(shadersFloor, 2, cam);
 
 	VladFedchenko::GL::RenderObjects::CubeRenderObject *obj = new VladFedchenko::GL::RenderObjects::CubeRenderObject(cam);
+	VladFedchenko::GL::RenderObjects::FloorRenderObject *floorObj = new VladFedchenko::GL::RenderObjects::FloorRenderObject(cam, "Source/Resources/Images/Floor.png", 1366, 768);
 
 	prog->AddObject(obj);
+	floorProg->AddObject(floorObj);
+
+	window.AddProgram(floorProg);
 	window.AddProgram(prog);
 
 	window.MainLoop();
 
 	delete prog;
 	delete obj;
+
+	delete floorProg;
+	delete floorObj;
+
 	delete cam;
 
 	return 0;

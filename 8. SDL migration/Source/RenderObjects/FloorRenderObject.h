@@ -8,15 +8,19 @@
 #ifndef FLOORRENDEROBJECT_H_
 #define FLOORRENDEROBJECT_H_
 
+#include "../RenderObject.h"
+
 namespace VladFedchenko{
 namespace GL{
 namespace RenderObjects{
 
-//	class FloorRenderObject : public RenderObject, public TexturedObject
-//	{
-//	public:
-//		FloorRenderObject()
-//	};
+	class FloorRenderObject : public VladFedchenko::GL::RenderObject, public VladFedchenko::GL::TexturedObject, public VladFedchenko::GL::ElementedObject
+	{
+	public:
+		FloorRenderObject(VladFedchenko::GL::Camera *camera, std::string floorTexFile, int w, int h);
+
+		void Render(unsigned long timeSpan, const GLuint &parentProgram);
+	};
 
 }}}
 

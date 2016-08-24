@@ -125,7 +125,7 @@ namespace GL{
 
 		for (RenderObject* obj : this->objectsToRender)
 		{
-			obj->Render(timeSpan, *this);
+			obj->Render(timeSpan, this->program);
 		}
 
 		glUseProgram(0);

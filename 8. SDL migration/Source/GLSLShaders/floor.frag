@@ -1,5 +1,7 @@
 #version 330 core
 
+uniform sampler2D tex;
+
 uniform vec3 Ambient;
 uniform vec3 LightColor;
 uniform vec3 ToLightDir;
@@ -29,7 +31,8 @@ void main(void)
 	vec3 scattered = Ambient + difuse * LightColor;
 	vec3 reflected = ReflStrength * specular * LightColor;
 	
-	vec4 base_col = vec4(vs_tex_coord.x, vs_tex_coord.y, 0.5, 1.0);
+	vec4 base_col = texture(tex, vs_tex_coord);
+	//vec4 base_col = vec4(vs_tex_coord.x, vs_tex_coord.y, 0.5, 1.0);
 	
 	vec3 col_rgb = min((base_col.rgb * scattered + reflected), vec3(1.0));
 	
