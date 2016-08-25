@@ -11,6 +11,9 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "ShaderProgram.h"
+#include "Helpers/CameraKeyMoveHandler.h"
+#include "Helpers/CameraMouseMoveHandler.h"
+#include "Camera.h"
 
 #define WIDTH 854
 #define HEIGHT 480
@@ -26,6 +29,12 @@ namespace GL{
 
 		std::vector<VladFedchenko::GL::ShaderProgram*> programs;
 
+		VladFedchenko::GL::Helpers::CameraKeyMoveHandler *cameraKeyHandler;
+		VladFedchenko::GL::Helpers::CameraMouseMoveHandler *cameraMouseHandler;
+
+		unsigned long prevFrameTime = 0;
+	private:
+
 		bool Init();
 		void CheckSDLError();
 		bool SetOpenGLAttributes();
@@ -36,6 +45,9 @@ namespace GL{
 
 		void AddProgram(VladFedchenko::GL::ShaderProgram* program);
 		bool RemoveProgram(VladFedchenko::GL::ShaderProgram* program);
+
+		void RegisterCameraKeyHandler(VladFedchenko::GL::Camera *camera);
+		void RegisterCameraMouseHandler(VladFedchenko::GL::Camera *camera, const glm::vec3 &rotCenter);
 
 		void MainLoop();
 	};

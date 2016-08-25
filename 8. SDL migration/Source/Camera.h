@@ -42,6 +42,8 @@ namespace GL{
 		const glm::mat4 GetLookAtMatr();
 		const glm::mat4 GetProjectionMatr();
 		const glm::mat4 GetVPMatr();
+
+		void PositionChanged(const glm::vec3 &toMove);
 	};
 
 }}

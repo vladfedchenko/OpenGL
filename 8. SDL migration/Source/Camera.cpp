@@ -11,8 +11,9 @@ namespace VladFedchenko{
 namespace GL{
 
 	Camera::Camera(const glm::vec3 &eye, const glm::vec3 &center, const glm::vec3 &up, float fov, float aspectRatio, float nearPlane, float farPlane)
-		: eye(eye), center(center), up(up)
+		: eye(eye), center(center)
 	{
+		this->up = glm::normalize(up);
 		this->lookAtMatr = glm::lookAt(this->eye, this->center, this->up);
 		this->projectionMatr = glm::perspective(fov, aspectRatio, nearPlane, farPlane);
 		this->ResetVPMatr();
@@ -38,7 +39,7 @@ namespace GL{
 	{
 		this->eye = eye;
 		this->center = center;
-		this->up = up;
+		this->up = glm::normalize(up);
 
 		this->lookAtMatr = glm::lookAt(this->eye, this->center, this->up);
 		this->ResetVPMatr();
@@ -72,6 +73,14 @@ namespace GL{
 	const glm::mat4 Camera::GetVPMatr()
 	{
 		return this->vpMatr;
+	}
+
+	void Camera::PositionChanged(const glm::vec3 &toMove)
+	{
+		this->eye += toMove;
+		this->center += toMove;
+
+		this->ResetView(this->eye, this->center, this->up);
 	}
 
 }}

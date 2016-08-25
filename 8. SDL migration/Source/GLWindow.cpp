@@ -18,6 +18,7 @@ namespace VladFedchenko{
 namespace GL{
 
 	GLWindow::GLWindow()
+		: cameraKeyHandler(nullptr), cameraMouseHandler(nullptr)
 	{
 		if (!this->Init())
 		{
@@ -28,6 +29,18 @@ namespace GL{
 
 	GLWindow::~GLWindow()
 	{
+		if (this->cameraKeyHandler != nullptr)
+		{
+			delete this->cameraKeyHandler;
+			this->cameraKeyHandler = nullptr;
+		}
+
+		if (this->cameraMouseHandler != nullptr)
+		{
+			delete this->cameraMouseHandler;
+			this->cameraMouseHandler = nullptr;
+		}
+
 		SDL_GL_DeleteContext(this->mainContext);
 		SDL_DestroyWindow(this->mainWindow);
 		SDL_Quit();
@@ -117,6 +130,28 @@ namespace GL{
 		return false;
 	}
 
+	void GLWindow::RegisterCameraKeyHandler(VladFedchenko::GL::Camera *camera)
+	{
+		if (this->cameraKeyHandler != nullptr)
+		{
+			delete this->cameraKeyHandler;
+			this->cameraKeyHandler = nullptr;
+		}
+
+		this->cameraKeyHandler = new VladFedchenko::GL::Helpers::CameraKeyMoveHandler(camera);
+	}
+
+	void GLWindow::RegisterCameraMouseHandler(VladFedchenko::GL::Camera *camera, const glm::vec3 &rotCenter)
+	{
+		if (this->cameraMouseHandler != nullptr)
+		{
+			delete this->cameraMouseHandler;
+			this->cameraMouseHandler = nullptr;
+		}
+
+		this->cameraMouseHandler = new VladFedchenko::GL::Helpers::CameraMouseMoveHandler(camera, rotCenter);
+	}
+
 	void GLWindow::MainLoop()
 	{
 		bool loop = true;
@@ -126,6 +161,15 @@ namespace GL{
 			SDL_Event event;
 			while (SDL_PollEvent(&event))
 			{
+				if (this->cameraKeyHandler != nullptr)
+				{
+					this->cameraKeyHandler->HandleEvent(event);
+				}
+				if (this->cameraMouseHandler != nullptr)
+				{
+					this->cameraMouseHandler->HandleEvent(event);
+				}
+
 				if (event.type == SDL_QUIT)
 				{
 					loop = false;
@@ -137,6 +181,7 @@ namespace GL{
 					case SDLK_ESCAPE:
 						loop = false;
 						break;
+
 					default:
 						break;
 					}
@@ -146,10 +191,18 @@ namespace GL{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			unsigned long timeSpan = SDL_GetTicks();
 
+			if (this->cameraKeyHandler != nullptr)
+			{
+				//std::cout << "Moving camera\n";
+				this->cameraKeyHandler->MoveCameraIfNeeded(timeSpan - this->prevFrameTime);
+			}
+
 			for (ShaderProgram *prog : this->programs)
 			{
 				prog->RenderObjects(timeSpan);
 			}
+
+			this->prevFrameTime = timeSpan;
 
 			SDL_GL_SwapWindow(this->mainWindow);
 		}
@@ -172,6 +225,9 @@ int main(int argc, char** argv)
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 15.0f, 15.0f);
 	Camera *cam = new Camera(eye, center, up, 45.0f, (float)WIDTH/ (float)HEIGHT, 1.0f, 100.0f);
+
+	window.RegisterCameraKeyHandler(cam);
+	window.RegisterCameraMouseHandler(cam, glm::vec3(0.0f, 0.0f, 0.0f));
 
 	ShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shadersCube, 2, cam);
 	ShaderProgram *floorProg = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexLoadShader(shadersFloor, 2, cam);

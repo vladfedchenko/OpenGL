@@ -4,12 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Source/Helpers/CameraKeyMoveHandler.cpp \
+../Source/Helpers/CameraMouseMoveHandler.cpp \
 ../Source/Helpers/PNGHelper.cpp 
 
 OBJS += \
+./Source/Helpers/CameraKeyMoveHandler.o \
+./Source/Helpers/CameraMouseMoveHandler.o \
 ./Source/Helpers/PNGHelper.o 
 
 CPP_DEPS += \
+./Source/Helpers/CameraKeyMoveHandler.d \
+./Source/Helpers/CameraMouseMoveHandler.d \
 ./Source/Helpers/PNGHelper.d 
 
 
