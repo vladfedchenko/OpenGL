@@ -11,6 +11,7 @@
 #include "ShaderPrograms/ClassicLMTexLoadShader.h"
 #include "RenderObjects/CubeRenderObject.h"
 #include "RenderObjects/FloorRenderObject.h"
+#include <string>
 
 using namespace VladFedchenko::GL;
 
@@ -18,12 +19,16 @@ namespace VladFedchenko{
 namespace GL{
 
 	GLWindow::GLWindow()
-		: cameraKeyHandler(nullptr), cameraMouseHandler(nullptr)
 	{
 		if (!this->Init())
 		{
 			std::cerr << "Cannot initialize window!" << std::endl;
-			exit(EXIT_FAILURE);
+			throw std::exception();
+		}
+		if (TTF_Init() == -1)
+		{
+			std::cerr << "SDL_ttf could not initialize! SDL_ttf Error:" << TTF_GetError() << std::endl;
+			throw std::exception();
 		}
 	}
 
@@ -41,8 +46,15 @@ namespace GL{
 			this->cameraMouseHandler = nullptr;
 		}
 
+		if (this->textRenderer != nullptr)
+		{
+			delete this->textRenderer;
+			this->textRenderer = nullptr;
+		}
+
 		SDL_GL_DeleteContext(this->mainContext);
 		SDL_DestroyWindow(this->mainWindow);
+		TTF_Quit();
 		SDL_Quit();
 	}
 
@@ -77,6 +89,8 @@ namespace GL{
 		}
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		return true;
@@ -112,14 +126,14 @@ namespace GL{
 		return true;
 	}
 
-	void GLWindow::AddProgram(VladFedchenko::GL::ShaderProgram *program)
+	void GLWindow::AddProgram(VladFedchenko::GL::RenderObjectShaderProgram *program)
 	{
 		this->programs.push_back(program);
 	}
 
-	bool GLWindow::RemoveProgram(VladFedchenko::GL::ShaderProgram *program)
+	bool GLWindow::RemoveProgram(VladFedchenko::GL::RenderObjectShaderProgram *program)
 	{
-		for (std::vector<ShaderProgram*>::iterator iter = this->programs.begin(); iter != this->programs.end(); ++iter)
+		for (std::vector<RenderObjectShaderProgram*>::iterator iter = this->programs.begin(); iter != this->programs.end(); ++iter)
 		{
 			if (*iter == program)
 			{
@@ -150,6 +164,28 @@ namespace GL{
 		}
 
 		this->cameraMouseHandler = new VladFedchenko::GL::Helpers::CameraMouseMoveHandler(camera, rotCenter);
+	}
+
+	void GLWindow::RegisterTextRenderer(const ShaderInfo *shaders, int shaderCount, std::string fontPath, int fontSize, SDL_Color textCol)
+	{
+		if (this->textRenderer != nullptr)
+		{
+			delete this->textRenderer;
+			this->textRenderer = nullptr;
+		}
+		this->textRenderer = new VladFedchenko::GL::ShaderPrograms::TextRenderProgram(shaders, shaderCount, fontPath, fontSize, textCol, WIDTH, HEIGHT);
+	}
+
+	void GLWindow::RenderText(int x, int y, std::string text)
+	{
+		if (this->textRenderer != nullptr)
+		{
+			this->textRenderer->RenderText(x, y, text);
+		}
+		else
+		{
+			std::cerr << "Register text renderer first\n";
+		}
 	}
 
 	void GLWindow::MainLoop()
@@ -197,10 +233,22 @@ namespace GL{
 				this->cameraKeyHandler->MoveCameraIfNeeded(timeSpan - this->prevFrameTime);
 			}
 
-			for (ShaderProgram *prog : this->programs)
+			for (RenderObjectShaderProgram *prog : this->programs)
 			{
 				prog->RenderObjects(timeSpan);
 			}
+
+			fpsTimer += timeSpan - this->prevFrameTime;
+			++fpcChechCount;
+			if (fpsTimer > FPS_RENEW_CYCLE)
+			{
+				this->fps = (float)fpcChechCount / ((float)fpsTimer / FPS_RENEW_CYCLE);
+
+				fpsTimer = 0;
+				fpcChechCount = 0;
+			}
+
+			this->RenderText(5, 5, "FPS: " + std::to_string(fps));
 
 			this->prevFrameTime = timeSpan;
 
@@ -220,6 +268,15 @@ int main(int argc, char** argv)
 	ShaderInfo shadersFloor[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/floor.vert" },
 			{GL_FRAGMENT_SHADER, "Source/GLSLShaders/floor.frag" }};
 
+	ShaderInfo shadersText[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/text.vert" },
+				{GL_FRAGMENT_SHADER, "Source/GLSLShaders/text.frag" }};
+
+	SDL_Color textCol;
+	textCol.r = 36;
+	textCol.g = 133;
+	textCol.b = 12;
+	textCol.a = 255;
+	window.RegisterTextRenderer(shadersText, 2, "Source/Resources/Fonts/helvetica.ttf", 14, textCol);
 
 	glm::vec3 eye(0.0f, -15.0f, 15.0f);
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
@@ -229,8 +286,8 @@ int main(int argc, char** argv)
 	window.RegisterCameraKeyHandler(cam);
 	window.RegisterCameraMouseHandler(cam, glm::vec3(0.0f, 0.0f, 0.0f));
 
-	ShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shadersCube, 2, cam);
-	ShaderProgram *floorProg = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexLoadShader(shadersFloor, 2, cam);
+	RenderObjectShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shadersCube, 2, cam);
+	RenderObjectShaderProgram *floorProg = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexLoadShader(shadersFloor, 2, cam);
 
 	VladFedchenko::GL::RenderObjects::CubeRenderObject *obj = new VladFedchenko::GL::RenderObjects::CubeRenderObject(cam);
 	VladFedchenko::GL::RenderObjects::FloorRenderObject *floorObj = new VladFedchenko::GL::RenderObjects::FloorRenderObject(cam, "Source/Resources/Images/Floor.png", 1366, 768);

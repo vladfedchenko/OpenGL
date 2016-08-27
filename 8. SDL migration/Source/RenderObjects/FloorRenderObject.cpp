@@ -62,7 +62,7 @@ namespace RenderObjects{
 			throw std::exception();
 		}
 
-		glActiveTexture(GL_TEXTURE0);
+
 		this->FillTexture2D(this->textures[0], colors, w, h);
 
 		delete colors;

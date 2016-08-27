@@ -15,11 +15,11 @@ namespace GL{
 namespace ShaderPrograms{
 
 	ClassicLMTexGenShader::ClassicLMTexGenShader(GLuint program, Camera *camera)
-		: ShaderProgram(program), camera(camera)
+		: RenderObjectShaderProgram(program), camera(camera)
 	{}
 
 	ClassicLMTexGenShader::ClassicLMTexGenShader(const ShaderInfo *shaders, int shaderCount, Camera *camera)
-		: ShaderProgram(shaders, shaderCount), camera(camera)
+		: RenderObjectShaderProgram(shaders, shaderCount), camera(camera)
 	{}
 
 	void ClassicLMTexGenShader::EnableUniformLocations()

@@ -16,11 +16,11 @@ namespace GL{
 namespace ShaderPrograms{
 
 	ClassicLMTexLoadShader::ClassicLMTexLoadShader(GLuint program, Camera *camera)
-		: ShaderProgram(program), camera(camera)
+		: RenderObjectShaderProgram(program), camera(camera)
 	{}
 
 	ClassicLMTexLoadShader::ClassicLMTexLoadShader(const ShaderInfo *shaders, int shaderCount, Camera *camera)
-		: ShaderProgram(shaders, shaderCount), camera(camera)
+		: RenderObjectShaderProgram(shaders, shaderCount), camera(camera)
 	{}
 
 	void ClassicLMTexLoadShader::EnableUniformLocations()
@@ -59,7 +59,7 @@ namespace ShaderPrograms{
 		VladFedchenko::GL::TexturedObject* tex = dynamic_cast<VladFedchenko::GL::TexturedObject*>(object);
 		if (tex != nullptr)
 		{
-			ShaderProgram::AddObject(object);
+			RenderObjectShaderProgram::AddObject(object);
 		}
 		else
 		{

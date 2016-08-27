@@ -32,21 +32,30 @@ namespace GL{
 
 	protected:
 		GLuint program;
-		std::vector<VladFedchenko::GL::RenderObject*> objectsToRender;
 		virtual void EnableUniformLocations() = 0;
 
 	public:
-
 		ShaderProgram(const ShaderInfo *shaders, int shaderCount);
 		ShaderProgram(GLuint program);
 		virtual ~ShaderProgram();
+
+		GLuint GetProgram() const;
+	};
+
+	class RenderObjectShaderProgram : public ShaderProgram
+	{
+	protected:
+		std::vector<VladFedchenko::GL::RenderObject*> objectsToRender;
+
+	public:
+		RenderObjectShaderProgram(const ShaderInfo *shaders, int shaderCount);
+		RenderObjectShaderProgram(GLuint program);
 
 		virtual void AddObject(VladFedchenko::GL::RenderObject *object);
 		bool RemoveObject(VladFedchenko::GL::RenderObject *object);
 
 		virtual void RenderObjects(unsigned long timeSpan);
 
-		GLuint GetProgram() const;
 	};
 
 }}

@@ -14,7 +14,7 @@ namespace VladFedchenko{
 namespace GL{
 namespace ShaderPrograms{
 
-class ClassicLMTexGenShader : public ShaderProgram
+class ClassicLMTexGenShader : public RenderObjectShaderProgram
 {
 private:
 	VladFedchenko::GL::Camera *camera;

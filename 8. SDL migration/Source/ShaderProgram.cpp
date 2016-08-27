@@ -99,12 +99,33 @@ namespace GL{
 		}
 	}
 
-	void ShaderProgram::AddObject(RenderObject *object)
+	GLuint ShaderProgram::GetProgram() const
+	{
+		return this->program;
+	}
+
+	//////////////////////////////////////////////////////////////////////
+
+	RenderObjectShaderProgram::RenderObjectShaderProgram(const ShaderInfo *shaders, int shaderCount)
+		: ShaderProgram(shaders, shaderCount)
+	{
+
+	}
+
+	RenderObjectShaderProgram::RenderObjectShaderProgram(GLuint prog)
+		: ShaderProgram(prog)
+	{
+
+	}
+
+
+
+	void RenderObjectShaderProgram::AddObject(RenderObject *object)
 	{
 		this->objectsToRender.push_back(object);
 	}
 
-	bool ShaderProgram::RemoveObject(RenderObject *object)
+	bool RenderObjectShaderProgram::RemoveObject(RenderObject *object)
 	{
 		for (std::vector<RenderObject*>::iterator iter = this->objectsToRender.begin(); iter != this->objectsToRender.end(); ++iter)
 		{
@@ -117,7 +138,7 @@ namespace GL{
 		return false;
 	}
 
-	void ShaderProgram::RenderObjects(unsigned long timeSpan)
+	void RenderObjectShaderProgram::RenderObjects(unsigned long timeSpan)
 	{
 		glUseProgram(this->program);
 
@@ -129,11 +150,6 @@ namespace GL{
 		}
 
 		glUseProgram(0);
-	}
-
-	GLuint ShaderProgram::GetProgram() const
-	{
-		return this->program;
 	}
 
 }}

@@ -49,7 +49,6 @@ namespace GL{
 
 	void TexturedObject::FillTexture2D(GLuint &tex, VladFedchenko::GL::Helpers::PixelColor *colors, int w, int h)
 	{
-		//glActiveTexture(activeTex);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0); //base mipmap level
 		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0); //max mipmap levels
@@ -58,6 +57,8 @@ namespace GL{
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, colors);
 		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 // end TexturedObject region

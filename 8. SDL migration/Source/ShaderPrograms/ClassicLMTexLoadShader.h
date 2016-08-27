@@ -15,7 +15,7 @@ namespace GL{
 namespace ShaderPrograms{
 
 
-class ClassicLMTexLoadShader : public ShaderProgram
+class ClassicLMTexLoadShader : public RenderObjectShaderProgram
 {
 private:
 	VladFedchenko::GL::Camera *camera;
