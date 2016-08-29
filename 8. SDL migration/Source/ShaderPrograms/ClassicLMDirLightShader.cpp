@@ -1,29 +1,28 @@
 /*
- * ClassicLMTexLoadShader.cpp
+ * ClassicLMDirLightShader.cpp
  *
- *  Created on: Aug 24, 2016
+ *  Created on: Aug 22, 2016
  *      Author: vladfedchenko
  */
 
-#include "ClassicLMTexLoadShader.h"
+#include "ClassicLMDirLightShader.h"
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <iostream>
 
 namespace VladFedchenko{
 namespace GL{
 namespace ShaderPrograms{
 
-	ClassicLMTexLoadShader::ClassicLMTexLoadShader(GLuint program, Camera *camera)
+	ClassicLMDirLightShader::ClassicLMDirLightShader(GLuint program, Camera *camera)
 		: RenderObjectShaderProgram(program), camera(camera)
 	{}
 
-	ClassicLMTexLoadShader::ClassicLMTexLoadShader(const ShaderInfo *shaders, int shaderCount, Camera *camera)
+	ClassicLMDirLightShader::ClassicLMDirLightShader(const ShaderInfo *shaders, int shaderCount, Camera *camera)
 		: RenderObjectShaderProgram(shaders, shaderCount), camera(camera)
 	{}
 
-	void ClassicLMTexLoadShader::EnableUniformLocations()
+	void ClassicLMDirLightShader::EnableUniformLocations()
 	{
 		glm::vec3 toEye = glm::normalize(this->camera->GetEye() - this->camera->GetCenter());
 		glm::vec3 ambient(0.1f, 0.1f, 0.1f);
@@ -52,19 +51,6 @@ namespace ShaderPrograms{
 
 		GLuint str_loc = glGetUniformLocation(this->program, "ReflStrength");
 		glUniform1f(str_loc, strenght);
-	}
-
-	void ClassicLMTexLoadShader::AddObject(VladFedchenko::GL::RenderObject *object)
-	{
-		VladFedchenko::GL::TexturedObject* tex = dynamic_cast<VladFedchenko::GL::TexturedObject*>(object);
-		if (tex != nullptr)
-		{
-			RenderObjectShaderProgram::AddObject(object);
-		}
-		else
-		{
-			std::cerr << "Program works only with textured objects";
-		}
 	}
 
 }}}

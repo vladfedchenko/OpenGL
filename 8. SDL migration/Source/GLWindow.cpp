@@ -7,8 +7,8 @@
 
 #include "GLWindow.h"
 #include <iostream>
-#include "ShaderPrograms/ClassicLMTexGenShader.h"
-#include "ShaderPrograms/ClassicLMTexLoadShader.h"
+#include "ShaderPrograms/ClassicLMDirLightShader.h"
+#include "ShaderPrograms/ClassicLMPointLightShader.h"
 #include "RenderObjects/CubeRenderObject.h"
 #include "RenderObjects/FloorRenderObject.h"
 #include <string>
@@ -262,11 +262,11 @@ int main(int argc, char** argv)
 {
 	GLWindow window;
 
-	ShaderInfo shadersCube[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/cube.vert" },
-		{GL_FRAGMENT_SHADER, "Source/GLSLShaders/cube.frag" }};
+	ShaderInfo shadersDirectional[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/directional.vert" },
+		{GL_FRAGMENT_SHADER, "Source/GLSLShaders/directional.frag" }};
 
-	ShaderInfo shadersFloor[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/floor.vert" },
-			{GL_FRAGMENT_SHADER, "Source/GLSLShaders/floor.frag" }};
+	ShaderInfo shadersPoint[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/point.vert" },
+			{GL_FRAGMENT_SHADER, "Source/GLSLShaders/point.frag" }};
 
 	ShaderInfo shadersText[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/text.vert" },
 				{GL_FRAGMENT_SHADER, "Source/GLSLShaders/text.frag" }};
@@ -286,24 +286,26 @@ int main(int argc, char** argv)
 	window.RegisterCameraKeyHandler(cam);
 	window.RegisterCameraMouseHandler(cam, glm::vec3(0.0f, 0.0f, 0.0f));
 
-	RenderObjectShaderProgram *prog = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexGenShader(shadersCube, 2, cam);
-	RenderObjectShaderProgram *floorProg = new VladFedchenko::GL::ShaderPrograms::ClassicLMTexLoadShader(shadersFloor, 2, cam);
+	RenderObjectShaderProgram *directional = new VladFedchenko::GL::ShaderPrograms::ClassicLMDirLightShader(shadersDirectional, 2, cam);
+	RenderObjectShaderProgram *point = new VladFedchenko::GL::ShaderPrograms::ClassicLMPointLightShader(shadersPoint, 2, cam);
 
 	VladFedchenko::GL::RenderObjects::CubeRenderObject *obj = new VladFedchenko::GL::RenderObjects::CubeRenderObject(cam);
 	VladFedchenko::GL::RenderObjects::FloorRenderObject *floorObj = new VladFedchenko::GL::RenderObjects::FloorRenderObject(cam, "Source/Resources/Images/Floor.png", 1366, 768);
 
-	prog->AddObject(obj);
-	floorProg->AddObject(floorObj);
+	directional->AddObject(obj);
+	directional->AddObject(floorObj);
 
-	window.AddProgram(floorProg);
-	window.AddProgram(prog);
+	point->AddObject(obj);
+	point->AddObject(floorObj);
+
+	//window.AddProgram(directional);
+	window.AddProgram(point);
 
 	window.MainLoop();
 
-	delete prog;
+	delete directional;
+	delete point;
 	delete obj;
-
-	delete floorProg;
 	delete floorObj;
 
 	delete cam;

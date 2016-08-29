@@ -80,13 +80,20 @@ namespace RenderObjects{
 		glm::mat4 rotate_matr = glm::rotate(identity, rotateAngle * 360.0f / (float)M_PI, glm::vec3(0.0, 0.0, 1.0));
 		glm::mat3 rotate3(rotate_matr);
 
-		glm::mat4 mvp_mat = this->camera->GetVPMatr() * model_matr * rotate_matr;
+		model_matr = model_matr * rotate_matr;
+		glm::mat4 mvp_mat = this->camera->GetVPMatr() * model_matr;
+
+		GLuint vertex_mvp_matr_loc = glGetUniformLocation(parentProgram, "vertex_mvp_matr");
+		glUniformMatrix4fv(vertex_mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
+
+		GLuint vertex_model_matr_loc = glGetUniformLocation(parentProgram, "vertex_model_matr");
+		glUniformMatrix4fv(vertex_model_matr_loc, 1, GL_FALSE, glm::value_ptr(model_matr));
 
 		GLuint normal_transform_matr_loc = glGetUniformLocation(parentProgram, "normal_transform_matr");
 		glUniformMatrix3fv(normal_transform_matr_loc, 1, GL_FALSE, glm::value_ptr(rotate3));
 
-		GLuint vertex_mvp_matr_loc = glGetUniformLocation(parentProgram, "vertex_mvp_matr");
-		glUniformMatrix4fv(vertex_mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
+		GLuint use_tex_loc = glGetUniformLocation(parentProgram, "use_texture");
+		glUniform1i(use_tex_loc, false);
 
 		int vertex_loc = glGetAttribLocation(parentProgram, "position");
 		int normal_loc = glGetAttribLocation(parentProgram, "normal");
@@ -107,6 +114,11 @@ namespace RenderObjects{
 
 			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (const void*) (0 * sizeof(GLuint)));
 		}
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glBindVertexArray(0);
 	}
 
 }}}

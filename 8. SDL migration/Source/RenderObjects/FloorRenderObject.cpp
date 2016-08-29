@@ -75,15 +75,25 @@ namespace RenderObjects{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementArrays[0]);
 
 		glm::mat4 identity(1.0f);
+		glm::mat3 iden3(1.0f);
 		glm::mat4 mvp_mat = this->camera->GetVPMatr() * identity;
 
 		GLuint mvp_matr_loc = glGetUniformLocation(parentProgram, "vertex_mvp_matr");
 		glUniformMatrix4fv(mvp_matr_loc, 1, GL_FALSE, glm::value_ptr(mvp_mat));
 
+		GLuint vertex_model_matr_loc = glGetUniformLocation(parentProgram, "vertex_model_matr");
+		glUniformMatrix4fv(vertex_model_matr_loc, 1, GL_FALSE, glm::value_ptr(identity));
+
+		GLuint normal_transform_matr_loc = glGetUniformLocation(parentProgram, "normal_transform_matr");
+		glUniformMatrix3fv(normal_transform_matr_loc, 1, GL_FALSE, glm::value_ptr(iden3));
+
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, this->textures[0]);
-		GLint tex1_uniform_loc = glGetUniformLocation(parentProgram, "tex");
+		GLuint tex1_uniform_loc = glGetUniformLocation(parentProgram, "tex");
 		glUniform1i(tex1_uniform_loc, 0);
+
+		GLuint use_tex_loc = glGetUniformLocation(parentProgram, "use_texture");
+		glUniform1i(use_tex_loc, true);
 
 		glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
 
@@ -101,6 +111,11 @@ namespace RenderObjects{
 		glEnableVertexAttribArray(tex_loc);
 
 		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (const void*) (0 * sizeof(GLuint)));
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glBindVertexArray(0);
 	}
 
 }}}
