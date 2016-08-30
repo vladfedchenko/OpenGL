@@ -10,6 +10,7 @@
 namespace VladFedchenko{
 namespace GL{
 namespace Helpers{
+namespace EventHandling {
 
 	CameraMouseMoveHandler::CameraMouseMoveHandler(VladFedchenko::GL::Camera *camera, const glm::vec3 &rotationCenter)
 		: camera(camera), arcballModeActive(true), rotationCenter(rotationCenter)
@@ -131,4 +132,4 @@ namespace Helpers{
 		trans_center += trans_eye;
 	}
 
-}}}
+}}}}

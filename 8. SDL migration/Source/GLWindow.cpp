@@ -7,13 +7,14 @@
 
 #include "GLWindow.h"
 #include <iostream>
-#include "ShaderPrograms/ClassicLMDirLightShader.h"
-#include "ShaderPrograms/ClassicLMPointLightShader.h"
-#include "RenderObjects/CubeRenderObject.h"
-#include "RenderObjects/FloorRenderObject.h"
 #include <string>
+#include <memory>
+#include "Helpers/EventHandling/ShaderProgramManager.h"
 
 using namespace VladFedchenko::GL;
+using namespace VladFedchenko::GL::Helpers::EventHandling;
+using namespace VladFedchenko::GL::RenderObjects;
+using namespace VladFedchenko::GL::Helpers::RenderHandling;
 
 namespace VladFedchenko{
 namespace GL{
@@ -34,17 +35,9 @@ namespace GL{
 
 	GLWindow::~GLWindow()
 	{
-		if (this->cameraKeyHandler != nullptr)
-		{
-			delete this->cameraKeyHandler;
-			this->cameraKeyHandler = nullptr;
-		}
-
-		if (this->cameraMouseHandler != nullptr)
-		{
-			delete this->cameraMouseHandler;
-			this->cameraMouseHandler = nullptr;
-		}
+		this->eventHandlers.clear();
+		this->renderHandlers.clear();
+		this->programs.clear();
 
 		if (this->textRenderer != nullptr)
 		{
@@ -131,39 +124,29 @@ namespace GL{
 		this->programs.push_back(program);
 	}
 
-	bool GLWindow::RemoveProgram(VladFedchenko::GL::RenderObjectShaderProgram *program)
+	void GLWindow::RemoveProgram(VladFedchenko::GL::RenderObjectShaderProgram *program)
 	{
-		for (std::vector<RenderObjectShaderProgram*>::iterator iter = this->programs.begin(); iter != this->programs.end(); ++iter)
-		{
-			if (*iter == program)
-			{
-				this->programs.erase(iter);
-				return true;
-			}
-		}
-		return false;
+		this->programs.remove(program);
 	}
 
-	void GLWindow::RegisterCameraKeyHandler(VladFedchenko::GL::Camera *camera)
+	void GLWindow::RegisterEventHandler(VladFedchenko::GL::Helpers::EventHandling::BaseEventHanler* handler)
 	{
-		if (this->cameraKeyHandler != nullptr)
-		{
-			delete this->cameraKeyHandler;
-			this->cameraKeyHandler = nullptr;
-		}
-
-		this->cameraKeyHandler = new VladFedchenko::GL::Helpers::CameraKeyMoveHandler(camera);
+		this->eventHandlers.push_back(handler);
 	}
 
-	void GLWindow::RegisterCameraMouseHandler(VladFedchenko::GL::Camera *camera, const glm::vec3 &rotCenter)
+	void GLWindow::UnregisterEventHandler(VladFedchenko::GL::Helpers::EventHandling::BaseEventHanler* handler)
 	{
-		if (this->cameraMouseHandler != nullptr)
-		{
-			delete this->cameraMouseHandler;
-			this->cameraMouseHandler = nullptr;
-		}
+		this->eventHandlers.remove(handler);
+	}
 
-		this->cameraMouseHandler = new VladFedchenko::GL::Helpers::CameraMouseMoveHandler(camera, rotCenter);
+	void GLWindow::RegisterRenderHandler(VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler* handler)
+	{
+		this->renderHandlers.push_back(handler);
+	}
+
+	void GLWindow::UnregisterRenderHandler(VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler* handler)
+	{
+		this->renderHandlers.remove(handler);
 	}
 
 	void GLWindow::RegisterTextRenderer(const ShaderInfo *shaders, int shaderCount, std::string fontPath, int fontSize, SDL_Color textCol)
@@ -197,13 +180,9 @@ namespace GL{
 			SDL_Event event;
 			while (SDL_PollEvent(&event))
 			{
-				if (this->cameraKeyHandler != nullptr)
+				for (Helpers::EventHandling::BaseEventHanler *handler : this->eventHandlers)
 				{
-					this->cameraKeyHandler->HandleEvent(event);
-				}
-				if (this->cameraMouseHandler != nullptr)
-				{
-					this->cameraMouseHandler->HandleEvent(event);
+					handler->HandleEvent(event);
 				}
 
 				if (event.type == SDL_QUIT)
@@ -227,10 +206,9 @@ namespace GL{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			unsigned long timeSpan = SDL_GetTicks();
 
-			if (this->cameraKeyHandler != nullptr)
+			for (BaseRenderHandler *handler : this->renderHandlers)
 			{
-				//std::cout << "Moving camera\n";
-				this->cameraKeyHandler->MoveCameraIfNeeded(timeSpan - this->prevFrameTime);
+				handler->BeforeFrameRender(timeSpan - this->prevFrameStartedTime, timeSpan - this->prevFrameFinishedTime);
 			}
 
 			for (RenderObjectShaderProgram *prog : this->programs)
@@ -238,7 +216,12 @@ namespace GL{
 				prog->RenderObjects(timeSpan);
 			}
 
-			fpsTimer += timeSpan - this->prevFrameTime;
+			for (BaseRenderHandler *handler : this->renderHandlers)
+			{
+				handler->OnFrameRendering();
+			}
+
+			fpsTimer += timeSpan - this->prevFrameStartedTime;
 			++fpcChechCount;
 			if (fpsTimer > FPS_RENEW_CYCLE)
 			{
@@ -250,7 +233,14 @@ namespace GL{
 
 			this->RenderText(5, 5, "FPS: " + std::to_string(fps));
 
-			this->prevFrameTime = timeSpan;
+			this->prevFrameStartedTime = timeSpan;
+			unsigned long prevFinishTmp = this->prevFrameFinishedTime;
+			this->prevFrameFinishedTime = SDL_GetTicks();
+
+			for (BaseRenderHandler *handler : this->renderHandlers)
+			{
+				handler->AfterFrameRender(this->prevFrameFinishedTime - timeSpan, this->prevFrameFinishedTime - prevFinishTmp);
+			}
 
 			SDL_GL_SwapWindow(this->mainWindow);
 		}
@@ -261,12 +251,6 @@ namespace GL{
 int main(int argc, char** argv)
 {
 	GLWindow window;
-
-	ShaderInfo shadersDirectional[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/directional.vert" },
-		{GL_FRAGMENT_SHADER, "Source/GLSLShaders/directional.frag" }};
-
-	ShaderInfo shadersPoint[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/point.vert" },
-			{GL_FRAGMENT_SHADER, "Source/GLSLShaders/point.frag" }};
 
 	ShaderInfo shadersText[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/text.vert" },
 				{GL_FRAGMENT_SHADER, "Source/GLSLShaders/text.frag" }};
@@ -281,34 +265,20 @@ int main(int argc, char** argv)
 	glm::vec3 eye(0.0f, -15.0f, 15.0f);
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 15.0f, 15.0f);
-	Camera *cam = new Camera(eye, center, up, 45.0f, (float)WIDTH/ (float)HEIGHT, 1.0f, 100.0f);
+	std::shared_ptr<Camera> cam(new Camera(eye, center, up, 45.0f, (float)WIDTH/ (float)HEIGHT, 1.0f, 100.0f));
 
-	window.RegisterCameraKeyHandler(cam);
-	window.RegisterCameraMouseHandler(cam, glm::vec3(0.0f, 0.0f, 0.0f));
+	std::shared_ptr<CameraKeyMoveHandler> cameraKeyMoveHandler(new CameraKeyMoveHandler(cam.get()));
+	window.RegisterEventHandler(cameraKeyMoveHandler.get());
+	window.RegisterRenderHandler(cameraKeyMoveHandler.get());
 
-	RenderObjectShaderProgram *directional = new VladFedchenko::GL::ShaderPrograms::ClassicLMDirLightShader(shadersDirectional, 2, cam);
-	RenderObjectShaderProgram *point = new VladFedchenko::GL::ShaderPrograms::ClassicLMPointLightShader(shadersPoint, 2, cam);
+	std::shared_ptr<CameraMouseMoveHandler> cameraMouseMoveHandler(new CameraMouseMoveHandler(cam.get(), glm::vec3(0.0f, 0.0f, 0.0f)));
+	window.RegisterEventHandler(cameraMouseMoveHandler.get());
 
-	VladFedchenko::GL::RenderObjects::CubeRenderObject *obj = new VladFedchenko::GL::RenderObjects::CubeRenderObject(cam);
-	VladFedchenko::GL::RenderObjects::FloorRenderObject *floorObj = new VladFedchenko::GL::RenderObjects::FloorRenderObject(cam, "Source/Resources/Images/Floor.png", 1366, 768);
-
-	directional->AddObject(obj);
-	directional->AddObject(floorObj);
-
-	point->AddObject(obj);
-	point->AddObject(floorObj);
-
-	//window.AddProgram(directional);
-	window.AddProgram(point);
+	std::shared_ptr<ShaderProgramManager> shaderManager(new ShaderProgramManager(window, cam.get()));
+	window.RegisterEventHandler(shaderManager.get());
+	window.RegisterRenderHandler(shaderManager.get());
 
 	window.MainLoop();
-
-	delete directional;
-	delete point;
-	delete obj;
-	delete floorObj;
-
-	delete cam;
 
 	return 0;
 }

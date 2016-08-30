@@ -9,8 +9,10 @@
 #define CAMERAKEYMOVEHANDLER_H_
 
 #include <map>
-#include "../Camera.h"
+#include "../../Camera.h"
 #include <SDL2/SDL.h>
+#include "BaseEventHanler.h"
+#include "../RenderHandling/BaseRenderHandler.h"
 
 #define STD_MOVE_COEF 2.0f
 #define SHIFT_MULT 5.0f
@@ -18,8 +20,10 @@
 namespace VladFedchenko{
 namespace GL{
 namespace Helpers{
+namespace EventHandling {
 
-	class CameraKeyMoveHandler
+	class CameraKeyMoveHandler : public BaseEventHanler
+		, public VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler
 	{
 	private:
 		Camera *camera;
@@ -28,16 +32,16 @@ namespace Helpers{
 
 	private:
 		float GetMoveCoof(unsigned long timePassed);
+		void MoveCameraIfNeeded(unsigned long timePassed);
 
 	public:
 		CameraKeyMoveHandler(VladFedchenko::GL::Camera *camera);
 
 		void HandleEvent(const SDL_Event &event);
-		void MoveCameraIfNeeded(unsigned long timePassed);
 
-
+		void BeforeFrameRender(unsigned long timeFromPrevStarted, unsigned long timeFromPrevFinished);
 	};
 
-}}}
+}}}}
 
 #endif /* CAMERAKEYMOVEHANDLER_H_ */

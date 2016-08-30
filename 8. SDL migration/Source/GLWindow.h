@@ -9,10 +9,12 @@
 #define GLWINDOW_H_
 
 #include <SDL2/SDL.h>
-#include <vector>
+#include <list>
 #include "ShaderProgram.h"
-#include "Helpers/CameraKeyMoveHandler.h"
-#include "Helpers/CameraMouseMoveHandler.h"
+#include "Helpers/EventHandling/BaseEventHanler.h"
+#include "Helpers/EventHandling/CameraKeyMoveHandler.h"
+#include "Helpers/EventHandling/CameraMouseMoveHandler.h"
+#include "Helpers/RenderHandling/BaseRenderHandler.h"
 #include "Camera.h"
 #include <SDL2/SDL_ttf.h>
 #include "ShaderPrograms/TextRenderProgram.h"
@@ -31,13 +33,13 @@ namespace GL{
 		SDL_Window *mainWindow;
 		SDL_GLContext mainContext;
 
-		std::vector<VladFedchenko::GL::RenderObjectShaderProgram*> programs;
-
-		VladFedchenko::GL::Helpers::CameraKeyMoveHandler *cameraKeyHandler = nullptr;
-		VladFedchenko::GL::Helpers::CameraMouseMoveHandler *cameraMouseHandler = nullptr;
+		std::list<VladFedchenko::GL::RenderObjectShaderProgram*> programs;
+		std::list<VladFedchenko::GL::Helpers::EventHandling::BaseEventHanler*> eventHandlers;
+		std::list<VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler*> renderHandlers;
 		VladFedchenko::GL::ShaderPrograms::TextRenderProgram *textRenderer = nullptr;
 
-		unsigned long prevFrameTime = 0;
+		unsigned long prevFrameFinishedTime = 0;
+		unsigned long prevFrameStartedTime = 0;
 		unsigned long fpsTimer = 0;
 		float fps = 0.0f;
 		unsigned int fpcChechCount = 0;
@@ -53,10 +55,14 @@ namespace GL{
 		~GLWindow();
 
 		void AddProgram(VladFedchenko::GL::RenderObjectShaderProgram* program);
-		bool RemoveProgram(VladFedchenko::GL::RenderObjectShaderProgram* program);
+		void RemoveProgram(VladFedchenko::GL::RenderObjectShaderProgram* program);
 
-		void RegisterCameraKeyHandler(VladFedchenko::GL::Camera *camera);
-		void RegisterCameraMouseHandler(VladFedchenko::GL::Camera *camera, const glm::vec3 &rotCenter);
+		void RegisterEventHandler(VladFedchenko::GL::Helpers::EventHandling::BaseEventHanler* handler);
+		void UnregisterEventHandler(VladFedchenko::GL::Helpers::EventHandling::BaseEventHanler* handler);
+
+		void RegisterRenderHandler(VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler* handler);
+		void UnregisterRenderHandler(VladFedchenko::GL::Helpers::RenderHandling::BaseRenderHandler* handler);
+
 		void RegisterTextRenderer(const ShaderInfo *shaders, int shaderCount, std::string fontPath, int fontSize, SDL_Color textCol);
 
 		void RenderText(int x, int y, std::string text);

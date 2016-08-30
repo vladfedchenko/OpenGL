@@ -27,4 +27,5 @@ Source/ShaderPrograms \
 Source \
 Source/RenderObjects \
 Source/Helpers \
+Source/Helpers/EventHandling \
 

@@ -13,6 +13,7 @@
 namespace VladFedchenko{
 namespace GL{
 namespace Helpers{
+namespace EventHandling {
 
 	CameraKeyMoveHandler::CameraKeyMoveHandler(VladFedchenko::GL::Camera *camera)
 		: camera(camera), shiftFlag(false)
@@ -137,6 +138,11 @@ namespace Helpers{
 		return base * (float)(timePassed / 1000.0f);
 	}
 
-}}}
+	void CameraKeyMoveHandler::BeforeFrameRender(unsigned long timeFromPrevStarted, unsigned long timeFromPrevFinished)
+	{
+		this->MoveCameraIfNeeded(timeFromPrevStarted);
+	}
+
+}}}}
 
 

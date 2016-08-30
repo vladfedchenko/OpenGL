@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include Source/ShaderPrograms/subdir.mk
 -include Source/RenderObjects/subdir.mk
+-include Source/Helpers/EventHandling/subdir.mk
 -include Source/Helpers/subdir.mk
 -include Source/subdir.mk
 -include subdir.mk

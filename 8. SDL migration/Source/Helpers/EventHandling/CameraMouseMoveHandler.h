@@ -8,16 +8,18 @@
 #ifndef CAMERAMOUSEMOVEHANDLER_H_
 #define CAMERAMOUSEMOVEHANDLER_H_
 
-#include "../Camera.h"
+#include "../../Camera.h"
 #include <SDL2/SDL.h>
+#include "BaseEventHanler.h"
 
 #define CAM_ROT_COEF 0.36f
 
 namespace VladFedchenko{
 namespace GL{
 namespace Helpers{
+namespace EventHandling {
 
-	class CameraMouseMoveHandler
+	class CameraMouseMoveHandler : public BaseEventHanler
 	{
 	private:
 		VladFedchenko::GL::Camera *camera;
@@ -35,6 +37,6 @@ namespace Helpers{
 		void TranslateVerticalNormalCam(glm::vec3 &trans_eye, glm::vec3 &trans_center, glm::vec3 &trans_up, float angle);
 	};
 
-}}}
+}}}}
 
 #endif /* CAMERAMOUSEMOVEHANDLER_H_ */
