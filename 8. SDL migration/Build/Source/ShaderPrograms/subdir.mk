@@ -6,16 +6,19 @@
 CPP_SRCS += \
 ../Source/ShaderPrograms/ClassicLMDirLightShader.cpp \
 ../Source/ShaderPrograms/ClassicLMPointLightShader.cpp \
+../Source/ShaderPrograms/ClassicLMSpotlightShader.cpp \
 ../Source/ShaderPrograms/TextRenderProgram.cpp 
 
 OBJS += \
 ./Source/ShaderPrograms/ClassicLMDirLightShader.o \
 ./Source/ShaderPrograms/ClassicLMPointLightShader.o \
+./Source/ShaderPrograms/ClassicLMSpotlightShader.o \
 ./Source/ShaderPrograms/TextRenderProgram.o 
 
 CPP_DEPS += \
 ./Source/ShaderPrograms/ClassicLMDirLightShader.d \
 ./Source/ShaderPrograms/ClassicLMPointLightShader.d \
+./Source/ShaderPrograms/ClassicLMSpotlightShader.d \
 ./Source/ShaderPrograms/TextRenderProgram.d 
 
 
