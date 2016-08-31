@@ -24,8 +24,12 @@ namespace EventHandling {
 		ShaderInfo shadersPoint[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/point.vert" },
 				{GL_FRAGMENT_SHADER, "Source/GLSLShaders/point.frag" }};
 
+		ShaderInfo shadersSpotlight[] = { {GL_VERTEX_SHADER, "Source/GLSLShaders/spotlight.vert" },
+				{GL_FRAGMENT_SHADER, "Source/GLSLShaders/spotlight.frag" }};
+
 		this->dirLightProg.reset(new VladFedchenko::GL::ShaderPrograms::ClassicLMDirLightShader(shadersDirectional, 2, camera));
 		this->pointLightProg.reset(new VladFedchenko::GL::ShaderPrograms::ClassicLMPointLightShader(shadersPoint, 2, camera));
+		this->spotlightProg.reset(new VladFedchenko::GL::ShaderPrograms::ClassicLMSpotlightShader(shadersSpotlight, 2, camera));
 
 		this->cubeObj.reset(new CubeRenderObject(camera));
 		this->floorObj.reset(new FloorRenderObject(camera, "Source/Resources/Images/Floor.png", 1366, 768));
@@ -35,6 +39,9 @@ namespace EventHandling {
 
 		this->pointLightProg->AddObject(this->cubeObj.get());
 		this->pointLightProg->AddObject(this->floorObj.get());
+
+		this->spotlightProg->AddObject(this->cubeObj.get());
+		this->spotlightProg->AddObject(this->floorObj.get());
 
 		this->window.AddProgram(this->dirLightProg.get());
 		this->prevProg = this->dirLightProg.get();
@@ -66,6 +73,13 @@ namespace EventHandling {
 						this->curLightMode = LightMode::POINT;
 					}
 					break;
+				case SDLK_3:
+					if (this->curLightMode != LightMode::SPOTLIGHT)
+					{
+						this->ResetProgram(this->spotlightProg.get());
+						this->curLightMode = LightMode::SPOTLIGHT;
+					}
+					break;
 				default:
 					break;
 				}
@@ -90,6 +104,9 @@ namespace EventHandling {
 			break;
 		case LightMode::POINT:
 			message += "Point";
+			break;
+		case LightMode::SPOTLIGHT:
+			message += "Spotlight";
 			break;
 		default:
 			message += "?";

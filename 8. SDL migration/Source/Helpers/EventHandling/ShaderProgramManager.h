@@ -15,6 +15,7 @@
 #include <memory>
 #include "../../ShaderPrograms/ClassicLMDirLightShader.h"
 #include "../../ShaderPrograms/ClassicLMPointLightShader.h"
+#include "../../ShaderPrograms/ClassicLMSpotlightShader.h"
 #include "../../RenderObjects/CubeRenderObject.h"
 #include "../../RenderObjects/FloorRenderObject.h"
 
@@ -30,7 +31,8 @@ namespace EventHandling {
 		typedef enum LightModeEnum
 		{
 			DIRECTIONAL,
-			POINT
+			POINT,
+			SPOTLIGHT
 		} LightMode;
 
 	private:
@@ -39,6 +41,7 @@ namespace EventHandling {
 
 		std::shared_ptr<VladFedchenko::GL::ShaderPrograms::ClassicLMDirLightShader> dirLightProg;
 		std::shared_ptr<VladFedchenko::GL::ShaderPrograms::ClassicLMPointLightShader> pointLightProg;
+		std::shared_ptr<VladFedchenko::GL::ShaderPrograms::ClassicLMSpotlightShader> spotlightProg;
 
 		std::shared_ptr<VladFedchenko::GL::RenderObjects::CubeRenderObject> cubeObj;
 		std::shared_ptr<VladFedchenko::GL::RenderObjects::FloorRenderObject> floorObj;

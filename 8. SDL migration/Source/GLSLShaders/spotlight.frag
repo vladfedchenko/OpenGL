@@ -15,6 +15,10 @@ uniform float LinearAttenuation;
 uniform float QuadraticAttenuation;
 uniform float DistanceScaleCoof;
 
+uniform vec3 ConeDirection;
+uniform float SpotCosCutoff;
+uniform float SpotExponent;
+
 layout (location = 0) out vec4 color;
 
 in vec3 vs_fs_normal;
@@ -28,10 +32,17 @@ void main(void)
 	lightDirection = lightDirection / lightDistance;
 	lightDistance *= DistanceScaleCoof;
 	
-	float attenuation = 1.0 /
-		(ConstantAttenuation + 
-		LinearAttenuation * lightDistance +
-		QuadraticAttenuation * lightDistance * lightDistance);
+	float spotCos = dot(lightDirection, -ConeDirection);
+	
+	float attenuation = 0.0;
+	if (spotCos > SpotCosCutoff)
+	{
+		attenuation = 1.0 /
+			(ConstantAttenuation + 
+			LinearAttenuation * lightDistance +
+			QuadraticAttenuation * lightDistance * lightDistance);
+		attenuation *= pow(spotCos, SpotExponent);
+	}
 		
 	vec3 halfVector = normalize(lightDirection + EyeDirection);
 

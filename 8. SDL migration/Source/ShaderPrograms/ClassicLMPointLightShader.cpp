@@ -25,16 +25,16 @@ namespace ShaderPrograms{
 	void ClassicLMPointLightShader::EnableUniformLocations()
 	{
 		glm::vec3 toEye = glm::normalize(this->camera->GetEye() - this->camera->GetCenter());
-		glm::vec3 ambient(0.1f, 0.1f, 0.1f);
+		glm::vec3 ambient(0.3f, 0.3f, 0.3f);
 		glm::vec3 lightCol(1.0f, 1.0f, 1.0f);
-		glm::vec3 lightPos(0.0, 0.0, 5.0);
+		glm::vec3 lightPos(0.0, 0.0, 6.0);
 
-		float shininess = 32.0f;
-		float strenght = 1.5f;
-		float constantAttenuation = 0.9f;
-		float linearAttenuation = 0.07f;
+		float shininess = 300.0f;
+		float strenght = 1.0f;
+		float constantAttenuation = 0.2f;
+		float linearAttenuation = 0.5f;
 		float quadraticAttenuation = 1.0f - linearAttenuation - constantAttenuation;
-		float amplification = 1.0f;
+		float distScaleCoof = 0.3f;
 
 		GLuint amb_loc = glGetUniformLocation(this->program, "Ambient");
 		glUniform3fv(amb_loc, 1, glm::value_ptr(ambient));
@@ -63,8 +63,8 @@ namespace ShaderPrograms{
 		GLuint quadraticAttenuationloc = glGetUniformLocation(this->program, "QuadraticAttenuation");
 		glUniform1f(quadraticAttenuationloc, quadraticAttenuation);
 
-		GLuint amplification_loc = glGetUniformLocation(this->program, "Amplification");
-		glUniform1f(amplification_loc, amplification);
+		GLuint distScale_loc = glGetUniformLocation(this->program, "DistanceScaleCoof");
+		glUniform1f(distScale_loc, distScaleCoof);
 	}
 
 }}}
