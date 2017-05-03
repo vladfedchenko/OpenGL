@@ -1,0 +1,6 @@
+#Ignore workspace metadata
+.metadata/
+
+#Ignore RemoteSystemsTempFiles
+
+RemoteSystemsTempFiles/
