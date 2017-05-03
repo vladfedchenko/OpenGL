@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;6. Cube movement/triangles.frag&apos; to &apos;floor.frag&apos;" description="Rename resource &apos;triangles.frag&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="triangles.frag" name="floor.frag" stamp="1470659252655" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;6. Cube movement/triangles.vert&apos; to &apos;floor.vert&apos;" description="Rename resource &apos;triangles.vert&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="triangles.vert" name="floor.vert" stamp="1470659261897" updateReferences="true"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;3. Draw functions&apos; to &apos;2. Draw functions&apos;" description="Rename resource &apos;3. Draw functions&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/3. Draw functions" name="2. Draw functions" stamp="1467549791901" updateReferences="true"/>
-</session>

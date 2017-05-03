@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;8. SDL migration&apos;" deleteContents="false" description="Delete resource &apos;8. SDL migration&apos;" element1="/8. SDL migration" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1471694387095"/>
-</session>
